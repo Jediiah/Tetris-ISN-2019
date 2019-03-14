@@ -4,7 +4,7 @@ import CONST
 class tablo:
 
     def __init__(self):
-        self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
+        self.tablo = [[0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
         self.score = 0
         
     
@@ -67,7 +67,7 @@ class newBlock:
             
         elif direction == 'DROITE':
             for (x,y) in self.positions[self.orient]:
-                if x<10 and tablo[y][x+1]==0:
+                if x<9 and tablo[y][x+1]==0:
                     continue
                 else:
                     peutDroite = False
