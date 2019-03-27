@@ -1,6 +1,6 @@
 import pygame, pygame.mixer, os.path
 from pygame.locals import*
-import CLASS
+import CLASSES, CONST
 
 # Initialise pygame
 pygame.init()
