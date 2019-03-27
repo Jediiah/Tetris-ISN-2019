@@ -1,10 +1,11 @@
 import pygame, pygame.mixer, os.path
 from pygame.locals import*
-#import 'classe_test up'
+import CLASS
+
 # Initialise pygame
 pygame.init()
 
-# DÃ©finir quelque couleurs
+# Definir quelque couleurs
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
