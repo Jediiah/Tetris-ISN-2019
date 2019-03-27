@@ -1,6 +1,6 @@
 import pygame, pygame.mixer, os.path
 from pygame.locals import*
-import CLASSES, CONST
+import CLASSES, CONST, leJeu
 
 # Initialise pygame
 pygame.init()
@@ -134,10 +134,10 @@ while not done:
     
 
     #image de présentation
-    if time1<8000:
-        screen.blit(Presentation, (0,0))
+    '''if time1<8000:
+        screen.blit(Presentation, (0,0))'''
         
-    if windows == 0 and time1>8000:
+    if windows == 0 and time1>0:
         #TETRIS clignotant
         screen.blit(liste[t], bt1)
         t+=1
@@ -207,11 +207,11 @@ while not done:
                     # --- Déssine la canevas écran du jeu --- #
 
         #fond du canevas
-        image = pygame.image.load("Images/fond_jeu.jpg")
+        image = pygame.image.load("Images/leJeu.png")
         position = (0,0)
         screen.blit(image, position)
 
-        #damier du tetris
+        '''#damier du tetris
         pygame.draw.rect(screen, WHITE, [50, 0, 400, 720])
         y, x = 40, 50
         for i in range(18):
@@ -224,12 +224,24 @@ while not done:
 
         #score
         pygame.draw.rect(screen, BLACK, [460, 80, 300, 200])
-        pygame.draw.rect(screen, BLACK, [460, 80, 300, 200], 5)
+        pygame.draw.rect(screen, BLACK, [460, 80, 300, 200], 5)'''
                 #ajouter le code ---------------------------------------------------#
+
+
+        while windows==1:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN and event.key == K_BACKSPACE:
+                    windows = 0
+
+            print(windows)
+            pygame.display.flip()
+            clock.tick(5)
+
+
     
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
- 
+
     # nbr de raffraichissement par seconde
     clock.tick(15)
  
