@@ -193,12 +193,14 @@ while not done:
                 done = True
 
     if windows == 2:
-        if event.type == KEYDOWN and event.key == K_KP0:
+        if event.type == KEYDOWN and event.key == K_BACKSPACE:
             windows = 0
 
             
 
     if windows == 1:
+        if event.type == KEYDOWN and event.key == K_BACKSPACE:
+            windows = 0
         son_base3.stop()
 
                     # --- Déssine la canevas écran du jeu --- #
