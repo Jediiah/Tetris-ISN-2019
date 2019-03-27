@@ -1,6 +1,6 @@
 import pygame, pygame.mixer, os.path
 from pygame.locals import*
-import class_test_up
+import classe_test_up
 # Initialise pygame
 pygame.init()
 
@@ -38,41 +38,41 @@ bt4 = x_bt4, y_bt4= (345, 550)  # Quitter
 
 	#images associées:
 
-Presentation = pygame.image.load("FIRST.png")
+Presentation = pygame.image.load("Images/FIRST.png")
 
 		# titre Tetris:
-T0 = pygame.image.load("Tetris_0.png")
-T1 = pygame.image.load("Tetris_1.png")
-T2 = pygame.image.load("Tetris_2.png")
-T3 = pygame.image.load("Tetris_3.png")
-T4 = pygame.image.load("Tetris_4.png")
-T5 = pygame.image.load("Tetris_5.png")
+T0 = pygame.image.load("Images/Tetris_0.png")
+T1 = pygame.image.load("Images/Tetris_1.png")
+T2 = pygame.image.load("Images/Tetris_2.png")
+T3 = pygame.image.load("Images/Tetris_3.png")
+T4 = pygame.image.load("Images/Tetris_4.png")
+T5 = pygame.image.load("Images/Tetris_5.png")
 t=0
 liste = [T0, T1, T2, T3, T4, T5]
 		# bouton Play:
-play = pygame.image.load("Play_0.png")
-play_s1 = pygame.image.load("Play_1.png")
-play_s2 = pygame.image.load("Play_2.png")
+play = pygame.image.load("Images/Play_0.png")
+play_s1 = pygame.image.load("Images/Play_1.png")
+play_s2 = pygame.image.load("Images/Play_2.png")
 
 playlist = [play, play_s1, play_s2]
 
 		# Option:
-option = pygame.image.load("Option_0.png")
-option_s1 = pygame.image.load("Option_1.png")
-option_s2 = pygame.image.load("Option_2.png")
+option = pygame.image.load("Images/Option_0.png")
+option_s1 = pygame.image.load("Images/Option_1.png")
+option_s2 = pygame.image.load("Images/Option_2.png")
 
 optionlist = [option, option_s1, option_s2]
 
                 # Quitter
-quitter = pygame.image.load("quitter.png")
-quitter_s1 = pygame.image.load("quitter_1.png")
-quitter_s2 = pygame.image.load("quitter_2.png")
+quitter = pygame.image.load("Images/quitter.png")
+quitter_s1 = pygame.image.load("Images/quitter_1.png")
+quitter_s2 = pygame.image.load("Images/quitter_2.png")
 
 quit_list = [quitter, quitter_s1, quitter_s2]
 
                 # retour
 
-back = pygame.image.load("Back.png")
+back = pygame.image.load("Images/Back.png")
 
 
 
@@ -80,12 +80,12 @@ nbr_touch = 0    #bouton sélectionné
 
     #son
 
-son_base1 = pygame.mixer.Sound("g.wav")
-son_base2 = pygame.mixer.Sound("son_tetris1.wav")
-son_base3 = pygame.mixer.Sound("Kid_koala.wav")
-son_play = pygame.mixer.Sound("sms1.wav")
-son_enter = pygame.mixer.Sound("sms2.wav")
-son_retour = pygame.mixer.Sound("sms_retour.wav")
+son_base1 = pygame.mixer.Sound("Sons/g.wav")
+son_base2 = pygame.mixer.Sound("Sons/son_tetris1.wav")
+son_base3 = pygame.mixer.Sound("Sons/Kid_koala.wav")
+son_play = pygame.mixer.Sound("Sons/sms1.wav")
+son_enter = pygame.mixer.Sound("Sons/sms2.wav")
+son_retour = pygame.mixer.Sound("Sons/sms_retour.wav")
 
 g, windows, sound = 0, 0, 1    #g: la musique jouer ; windows: fenêtre en cours
                                #d'ouverture; sound: gestion du son dans option
@@ -204,7 +204,7 @@ while not done:
                     # --- Déssine la canevas écran du jeu --- #
 
         #fond du canevas
-        image = pygame.image.load("fond_jeu.jpg")
+        image = pygame.image.load("Images/fond_jeu.jpg")
         position = (0,0)
         screen.blit(image, position)
 
@@ -232,6 +232,7 @@ while not done:
  
 # Ferme la fenêtre et quitte.
 pygame.quit()
+
 
 
 
