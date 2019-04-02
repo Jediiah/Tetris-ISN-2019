@@ -1,11 +1,12 @@
-import pygame as pyg
+import pygame
 import CONST
 
 class tablo:
 
     def __init__(self):
-        self.tablo = [[0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
+        self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
         self.score = 0
+        self.isvide = True
         
     
     # Actualise le tablo, les scores/combos
@@ -29,9 +30,9 @@ class tablo:
                 self.tablo[y][x] = 0
             for (x,y) in positionsApres:
                 self.tablo[y][x] = 1 # + la couleur
-            return(False)
+            self.isvide = False
         else:
-            return(True)
+            self.isvide = True
 
 
 
@@ -41,9 +42,10 @@ class newBlock:
     def __init__(self, forme, tablo):
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
-        self.positions = give_position(forme, tablo)
-        self.forme = forme
         self.orient = 'DOWN'
+        self.jsp = give_position(forme[self.orient], tablo)
+        self.positions = forme
+        
         
 
 

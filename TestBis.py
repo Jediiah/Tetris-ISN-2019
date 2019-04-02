@@ -200,16 +200,15 @@ while not done:
             
 
     if windows == 1:
-        if event.type == KEYDOWN and event.key == K_BACKSPACE:
-            windows = 0
         son_base3.stop()
 
-                    # --- Déssine la canevas écran du jeu --- #
+                    # --- Déssine écran du jeu --- #
 
-        #fond du canevas
+        #fond 
         image = pygame.image.load("Images/leJeu.png")
         position = (0,0)
         screen.blit(image, position)
+        platoJeu = screen.subsurface(50,0,400,720)
 
         '''#damier du tetris
         pygame.draw.rect(screen, WHITE, [50, 0, 400, 720])
@@ -227,13 +226,39 @@ while not done:
         pygame.draw.rect(screen, BLACK, [460, 80, 300, 200], 5)'''
                 #ajouter le code ---------------------------------------------------#
 
+        tabloJeu = CLASSES.tablo()
+        gravite = pygame.event.Event(KEYDOWN, key='laGravite')
 
         while windows==1:
+            
+            if tabloJeu.isvide:
+                blocTombe = CLASSES.newBlock(CONST.eclaireD,'Bleu')
+
+            pygame.time.set_timer(gravite,1000)
+
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_BACKSPACE:
                     windows = 0
+                if event.type == KEYDOWN and event.key == K_RIGHT:
+                    blocTombe.deplacement('DROITE', tabloJeu)
+                if event.type == KEYDOWN and event.key == K_LEFT:
+                    blocTombe.deplacement('GAUCHE',tabloJeu)
+                if event.type == KEYDOWN and event.key == K_DOWN:
+                    blocTombe.deplacement('BAS',tabloJeu)
+                if event.type == KEYDOWN and event.key == K_UP:
+                    blocTombe.rotation(blocTombe.forme,tabloJeu)
+                if event.type == KEYDOWN and event.key == 'laGravite':
+                    blocTombe.deplacement('BAS',tabloJeu)
 
-            print(windows)
+            tabloJeu.test()
+            # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
+            for i in range(20):
+                for j in range(11):
+                    if tabloJeu.tablo[i][j]!=0:
+                        platoJeu.blit(image,(j*30, 600-(i+1)*30))
+                        
+            
+            
             pygame.display.flip()
             clock.tick(5)
 
