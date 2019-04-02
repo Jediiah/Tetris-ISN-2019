@@ -39,12 +39,13 @@ class tablo:
 
 class newBlock:
 
-    def __init__(self, forme, tablo):
+    def __init__(self, laForme, forme, tablo):
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
         self.orient = 'DOWN'
         self.jsp = give_position(forme[self.orient], tablo)
         self.positions = forme
+        self.forme = laForme
         
         
 
@@ -122,7 +123,6 @@ def give_position(forme, tablo):  # forme vient de CONST et tablo est le tablo u
     for (x,y) in forme:
         tablo.tablo[y][x] = 1 # ajouter code couleur ...a definir
     return(forme)
-    
 
     
         
