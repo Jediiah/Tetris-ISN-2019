@@ -88,7 +88,7 @@ son_play = pygame.mixer.Sound("Sons/sms1.wav")
 son_enter = pygame.mixer.Sound("Sons/sms2.wav")
 son_retour = pygame.mixer.Sound("Sons/sms_retour.wav")
 
-g, windows, sound = 0, 0, 1    #g: la musique jouer ; windows: fenêtre en cours
+g, windows, sound = 0, 1, 1    #g: la musique jouer ; windows: fenêtre en cours
                                #d'ouverture; sound: gestion du son dans option
 
 
@@ -200,7 +200,7 @@ while not done:
             
 
     if windows == 1:
-        son_base3.stop()
+        #son_base3.stop()
 
                     # --- Déssine écran du jeu --- #
 
@@ -232,9 +232,9 @@ while not done:
         while windows==1:
             
             if tabloJeu.isvide:
-                blocTombe = CLASSES.newBlock(CONST.eclaireD,'Bleu')
+                blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
 
-            pygame.time.set_timer(gravite,1000)
+            pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut-etre accelerer)
 
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_BACKSPACE:

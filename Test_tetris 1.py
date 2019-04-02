@@ -53,23 +53,18 @@ while not done:
     screen.blit(image, position)
 
     #damier du tetris
-    window = screen.subsurface((50, 50, 350, 750))
+    window = screen.subsurface((50, 5, 350, 700))
     window.fill(WHITE)
     y, x = 35, 35
     for i in range(20):
-        pygame.draw.line(window, GREY, [0, y], [400,y], 1)
+        pygame.draw.line(window, GREY, [0, y], [350,y], 1)
         y += 35
     for y in range(10):
-        pygame.draw.line(window, GREY, [x, 0], [x,720], 1)
+        pygame.draw.line(window, GREY, [x, 0], [x,750], 1)
         x += 35
+        
     # pygame.draw.rect(screen, BLACK, [50, 50, 300, 600], 5)
 
-
-
-
-
-
-    
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
