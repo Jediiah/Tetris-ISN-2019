@@ -46,6 +46,7 @@ class newBlock:
         self.forme = laForme
         self.jsp = give_position(forme[self.orient], self.forme, tablo)
         self.positions = forme
+        self.forme = laForme
         
         
 

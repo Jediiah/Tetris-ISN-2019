@@ -1,2 +1,3 @@
 # Tetris-ISN-2019
-Ca arrive je commence à comprendre.
+C'est partie les amis on peux y arriver,
+où allons nous 
