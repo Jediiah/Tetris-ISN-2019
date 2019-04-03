@@ -1,5 +1,5 @@
 import pygame
-from random import randint
+
 
 NOIR = (0, 0, 0)
 BLANC = (255, 255, 255)
@@ -9,25 +9,6 @@ BLEU =  (  0,   0, 255)
 GRIS = (128, 128, 128)
 VIOLET = (98, 14, 104)
 # Peut etre plus de couleurs ....
-
-# selection aleatoire de bloc
-
-def SelecBloc():
-    a=randint(0,7)
-    if a==0:
-	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
-    if a==1:
-	    blocTombe = CLASSES.newBlock('LaBarre', CONST.LaBarre, tabloJeu)
-    if a==2:
-	    blocTombe = CLASSES.newBlock('LeThe', CONST.LeThe, tabloJeu)
-if a==3:
-	blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
-if a==4:
-	blocTombe = CLASSES.newBlock('eclaireG', CONST.eclaireG, tabloJeu)
-if a==5:
-	blocTombe = CLASSES.newBlock('elleD', CONST.elleD, tabloJeu)
-if a==6:
-	blocTombe = CLASSES.newBlock('elleG', CONST.elleG, tabloJeu)
 
 
 # Formes de Blocs : liste de coordonnees

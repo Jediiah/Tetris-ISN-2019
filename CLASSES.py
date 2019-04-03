@@ -24,12 +24,12 @@ class tablo:
             self.score = int(x)
         # a continuer pour les combos et les scores
 
-    def update(self, estArrive=False, positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
+    def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
         if not estArrive:
             for (x,y) in positionsAvant:
                 self.tablo[y][x] = 0
             for (x,y) in positionsApres:
-                self.tablo[y][x] = 1 # + la couleur
+                self.tablo[y][x] = formestr # + la couleur
             self.isvide = False
         else:
             self.isvide = True
@@ -43,9 +43,9 @@ class newBlock:
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
         self.orient = 'DOWN'
-        self.jsp = give_position(forme[self.orient], tablo)
-        self.positions = forme
         self.forme = laForme
+        self.jsp = give_position(forme[self.orient], self.forme, tablo)
+        self.positions = forme
         
         
 
@@ -64,7 +64,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x,y-1)
-                tablo.update(posAvant, self.positions[self.orient]) 
+                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
                 tablo.update(estArrive=True)    # les argument à revoir
             
@@ -80,7 +80,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x+1,y)
-                tablo.update(posAvant, self.positions[self.orient])
+                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
             for (x,y) in self.positions[self.orient]:
@@ -94,7 +94,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x-1,y)
-                tablo.update(posAvant, self.positions[self.orient])
+                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 
     def rotation(self, forme, tablo):
@@ -119,9 +119,9 @@ class newBlock:
             tablo.update(posAvant, self.positions[self.orient])
 
 
-def give_position(forme, tablo):  # forme vient de CONST et tablo est le tablo utilisé
+def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
     for (x,y) in forme:
-        tablo.tablo[y][x] = 1 # ajouter code couleur ...a definir
+        tablo.tablo[y][x] = formestr # ajouter code couleur ...a definir
     return(forme)
 
     
