@@ -16,12 +16,12 @@ class tablo:
             if not 0 in self.tablo[i]:
                 for j in range(i,19):
                     self.tablo[j] = self.tablo[j+1] # ca marche paa 
-                self.score += int(x)
+                self.score += 10 # a changer
                 combo += 1
                 i -= 1
 
         if combo >= 4:
-            self.score = int(x)
+            self.score = 10  # a changer
         # a continuer pour les combos et les scores
 
     def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
@@ -65,7 +65,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x,y-1)
-                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
+                tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
                 tablo.update(estArrive=True)    # les argument à revoir
             
@@ -81,7 +81,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x+1,y)
-                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
+                tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
             for (x,y) in self.positions[self.orient]:
@@ -95,7 +95,7 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x-1,y)
-                tablo.update(formestr=self.Forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
+                tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 
     def rotation(self, forme, tablo):
