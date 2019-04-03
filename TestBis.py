@@ -1,6 +1,6 @@
 import pygame, pygame.mixer, os.path
-from pygame.locals import*
-import CLASSES, CONST, leJeu
+import pygame.locals
+import CLASSES, CONST
 
 # Initialise pygame
 pygame.init()
@@ -205,10 +205,10 @@ while not done:
                     # --- Déssine écran du jeu --- #
 
         #fond 
-        image = pygame.image.load("Images/leJeu.png")
+        image = pygame.image.load("Images/nvoLeJeu.png")
         position = (0,0)
         screen.blit(image, position)
-        platoJeu = screen.subsurface(50,0,400,720)
+        platoJeu = screen.subsurface(47,4,347,604)
 
         '''#damier du tetris
         pygame.draw.rect(screen, WHITE, [50, 0, 400, 720])
@@ -227,7 +227,7 @@ while not done:
                 #ajouter le code ---------------------------------------------------#
 
         tabloJeu = CLASSES.tablo()
-        gravite = pygame.event.Event(KEYDOWN, key='laGravite')
+        gravite = pygame.USEREVENT + 1
 
         while windows==1:
             
@@ -247,14 +247,14 @@ while not done:
                     blocTombe.deplacement('BAS',tabloJeu)
                 if event.type == KEYDOWN and event.key == K_UP:
                     blocTombe.rotation(blocTombe.forme,tabloJeu)
-                if event.type == KEYDOWN and event.key == 'laGravite':
+                if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
             tabloJeu.test()
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             for i in range(20):
                 for j in range(11):
-                    if tabloJeu.tablo[i][j]!=0:
+                    if tabloJeu.tablo[i][j] != 0:
                         platoJeu.blit(image,(j*30, 600-(i+1)*30))
                         
             
