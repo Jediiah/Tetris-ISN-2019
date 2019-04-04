@@ -43,11 +43,11 @@ elleG = {'UP':[(7,19),(5,18),(6,18),(7,18)],
 # les images de blocs
 
 lesImages = {
-    'carre' : pygame.image.load("Images/jaune.png"),
-    'laBarre' : pygame.image.load("Images/bleu.png"),
-    'leThe' : pygame.image.load("Images/violet.png"),
-    'eclaireD' : pygame.image.load("Images/vert.png"),
-    'eclaireG' : pygame.image.load("Images/orange.png"),
-    'elleG' : pygame.image.load("Images/rose.png"),
-    'elleD' : pygame.image.load("Images/rouge.png"),
+    'carre' : pygame.image.load("Images/BlocJaune.png"),
+    'laBarre' : pygame.image.load("Images/BlocBleu.png"),
+    'leThe' : pygame.image.load("Images/BlocBleu.png"),
+    'eclaireD' : pygame.image.load("Images/BlocVert.png"),
+    'eclaireG' : pygame.image.load("Images/BlocOrange.png"),
+    'elleG' : pygame.image.load("Images/BlocRose.png"),
+    'elleD' : pygame.image.load("Images/BlocRouge.png"),
 }
