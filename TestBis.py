@@ -275,7 +275,7 @@ while not done:
             tabloJeu.test()
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             for i in range(20):
-                for j in range(11):
+                for j in range(10):
                     if tabloJeu.tablo[i][j] != 0:
                         platoJeu.blit(image,(j*30, 600-(i+1)*30))
                         
