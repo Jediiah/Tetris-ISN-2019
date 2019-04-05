@@ -14,9 +14,9 @@ def SelecBloc():
     if a==0:
 	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
     elif a==1:
-	    blocTombe = CLASSES.newBlock('LaBarre', CONST.laBarre, tabloJeu)
+	    blocTombe = CLASSES.newBlock('laBarre', CONST.laBarre, tabloJeu)
     elif a==2:
-	    blocTombe = CLASSES.newBlock('LeThe', CONST.leThe, tabloJeu)
+	    blocTombe = CLASSES.newBlock('leThe', CONST.leThe, tabloJeu)
     elif a==3:
 	    blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
     elif a==4:
@@ -236,15 +236,11 @@ while not done:
         position = (0,0)
         screen.blit(image, position)
 
-                 #son_base3.stop()
-            # -- Déssine l'écran du jeu -- #
-            #fond 
-            image = pygame.image.load("Images/nvoLeJeu.png")
-            position = (0,0)
-            screen.blit(image, position)
-
-            # delimitation de la zone de jeu (le cadrillage)
-            platoJeu = screen.subsurface(47,4,347,604)
+        # delimitation de la zone de jeu (le cadrillage)
+        platoJeu = screen.subsurface(47,4,347,604)
+        
+        tabloJeu = CLASSES.tablo()
+        gravite = pygame.USEREVENT + 1
 
        #  Boucle principale du jeu   
         while windows==1:
