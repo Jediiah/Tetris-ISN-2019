@@ -46,7 +46,6 @@ class newBlock:
         self.forme = laForme
         self.jsp = give_position(forme[self.orient], self.forme, tablo)
         self.positions = forme
-        self.forme = laForme
         
         
 
@@ -55,7 +54,7 @@ class newBlock:
         if direction == 'BAS':
             peutDescendre = True
             for (x,y) in self.positions[self.orient]:
-                if y>0 and tablo[y-1][x]==0:
+                if y>0 and tablo.tablo[y-1][x]==0:
                     continue
                 else:
                     peutDescendre = False
@@ -70,8 +69,9 @@ class newBlock:
                 tablo.update(estArrive=True)    # les argument à revoir
             
         elif direction == 'DROITE':
+            peutDroite = True
             for (x,y) in self.positions[self.orient]:
-                if x<9 and tablo[y][x+1]==0:
+                if x<9 and tablo.tablo[y][x+1]==0:
                     continue
                 else:
                     peutDroite = False
@@ -84,8 +84,9 @@ class newBlock:
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
+            peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x>1 and tablo[y][x-1]==0:
+                if x>1 and tablo.tablo[y][x-1]==0:
                     continue
                 else:
                     peutGauche = False
@@ -106,9 +107,9 @@ class newBlock:
             t = ['DOWN','RIGHT','UP','RIGHT']
         else:
             t = ['DOWN', 'UP']
-        orientation = t[t.index(self.orient)]
+        orientation = t.index(self.orient)-1
+        peutTourner = True
         for (x,y) in self.positions[t[orientation-1]]:
-            peutTourner = True
             if 0<x<11 and y>0 and tablo.tablo[y][x]==0:
                 continue
             else:
@@ -116,13 +117,13 @@ class newBlock:
                 break
         if peutTourner:
             posAvant = self.positions[self.orient].copy()
-            self.orient = orientation
+            self.orient = t[orientation]
             tablo.update(posAvant, self.positions[self.orient])
 
 
 def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
     for (x,y) in forme:
-        tablo.tablo[y][x] = formestr # ajouter code couleur ...a definir
+        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
     return(forme)
 
     

@@ -6,14 +6,6 @@ import CLASSES, CONST
 # Initialise pygame
 pygame.init()
 
-# Definir quelque couleurs
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE =  (  0,   0, 255)
-GREY = (128, 128, 128)
-PURPLE = (98, 14, 104)
 
 # selection aleatoire de bloc
 def SelecBloc():
@@ -135,7 +127,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    screen.fill(BLACK) # fond de la fenetre en noir
+    screen.fill(CONST.NOIR) # fond de la fenetre en noir
     time1 = pygame.time.get_ticks() # temps après lancer de pygame (en ms)
     
     #   musique principale
@@ -236,7 +228,8 @@ while not done:
 #'''================================================================================================='''
 
     elif windows==1:
-        #son_base3.stop()
+
+       #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
         image = pygame.image.load("Images/nvoLeJeu.png")
@@ -250,24 +243,27 @@ while not done:
         tabloJeu = CLASSES.tablo()
         gravite = pygame.USEREVENT + 1
 
-    #  Boucle principale du jeu   
+       #  Boucle principale du jeu   
         while windows==1:
-            
+
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
 
             pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
             for event in pygame.event.get():
-                if event.type == KEYDOWN and event.key == K_BACKSPACE:
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
+                    done = True
                     windows = 0
-                if event.type == KEYDOWN and event.key == K_RIGHT:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                     blocTombe.deplacement('DROITE', tabloJeu)
-                if event.type == KEYDOWN and event.key == K_LEFT:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                     blocTombe.deplacement('GAUCHE',tabloJeu)
-                if event.type == KEYDOWN and event.key == K_DOWN:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                     blocTombe.deplacement('BAS',tabloJeu)
-                if event.type == KEYDOWN and event.key == K_UP:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                     blocTombe.rotation(blocTombe.forme,tabloJeu)
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
@@ -277,7 +273,7 @@ while not done:
             for i in range(20):
                 for j in range(10):
                     if tabloJeu.tablo[i][j] != 0:
-                        platoJeu.blit(image,(j*30, 600-(i+1)*30))
+                        platoJeu.blit(CONST.lesImages[blocTombe.forme],(j*30, 600-(i+1)*30))
                         
             
             
