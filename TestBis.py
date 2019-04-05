@@ -236,12 +236,15 @@ while not done:
         position = (0,0)
         screen.blit(image, position)
 
-        # delimitation de la zone de jeu (le cadrillage)
-        platoJeu = screen.subsurface(47,4,347,604)
+                 #son_base3.stop()
+            # -- Déssine l'écran du jeu -- #
+            #fond 
+            image = pygame.image.load("Images/nvoLeJeu.png")
+            position = (0,0)
+            screen.blit(image, position)
 
-        # creation du tablo (ref) et gravite est un nouvel evenement pygame (ref)
-        tabloJeu = CLASSES.tablo()
-        gravite = pygame.USEREVENT + 1
+            # delimitation de la zone de jeu (le cadrillage)
+            platoJeu = screen.subsurface(47,4,347,604)
 
        #  Boucle principale du jeu   
         while windows==1:
