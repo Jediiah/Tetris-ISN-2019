@@ -236,38 +236,40 @@ while not done:
 #'''================================================================================================='''
 
     elif windows==1:
-        #son_base3.stop()
-        # -- Déssine l'écran du jeu -- #
-        #fond 
-        image = pygame.image.load("Images/nvoLeJeu.png")
-        position = (0,0)
-        screen.blit(image, position)
-
-        # delimitation de la zone de jeu (le cadrillage)
-        platoJeu = screen.subsurface(47,4,347,604)
-
-        # creation du tablo (ref) et gravite est un nouvel evenement pygame (ref)
-        tabloJeu = CLASSES.tablo()
-        gravite = pygame.USEREVENT + 1
-
-    #  Boucle principale du jeu   
+       #  Boucle principale du jeu   
         while windows==1:
-            
+
+                 #son_base3.stop()
+            # -- Déssine l'écran du jeu -- #
+            #fond 
+            image = pygame.image.load("Images/nvoLeJeu.png")
+            position = (0,0)
+            screen.blit(image, position)
+
+            # delimitation de la zone de jeu (le cadrillage)
+            platoJeu = screen.subsurface(47,4,347,604)
+
+            # creation du tablo (ref) et gravite est un nouvel evenement pygame (ref)
+            tabloJeu = CLASSES.tablo()
+            gravite = pygame.USEREVENT + 1
+
+                
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
 
             pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
             for event in pygame.event.get():
-                if event.type == KEYDOWN and event.key == K_BACKSPACE:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
+                    done = True
                     windows = 0
-                if event.type == KEYDOWN and event.key == K_RIGHT:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                     blocTombe.deplacement('DROITE', tabloJeu)
-                if event.type == KEYDOWN and event.key == K_LEFT:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                     blocTombe.deplacement('GAUCHE',tabloJeu)
-                if event.type == KEYDOWN and event.key == K_DOWN:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                     blocTombe.deplacement('BAS',tabloJeu)
-                if event.type == KEYDOWN and event.key == K_UP:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                     blocTombe.rotation(blocTombe.forme,tabloJeu)
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
