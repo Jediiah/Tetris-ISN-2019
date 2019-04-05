@@ -26,10 +26,10 @@ class tablo:
 
     def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
         if not estArrive:
-            for (x,y) in positionsAvant:
-                self.tablo[y][x] = 0
-            for (x,y) in positionsApres:
-                self.tablo[y][x] = formestr # + la couleur
+            for (xAvant,yAvant) in positionsAvant:
+                self.tablo[yAvant][xAvant] = 0
+            for (xApres,yApres) in positionsApres:
+                self.tablo[yApres][xApres] = formestr # + la couleur
             self.isvide = False
         else:
             self.isvide = True
@@ -48,15 +48,16 @@ class newBlock:
         self.positions = forme
         
         
-
-
     def deplacement(self,direction,tablo):
         if direction == 'BAS':
             peutDescendre = True
             for (x,y) in self.positions[self.orient]:
-                if y>0 and tablo.tablo[y-1][x]==0:
+                print('Bas', not (x,y-1) in self.positions[self.orient])
+                if y>0 and (not (x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
+                    print('Oui, Bas | case 0', tablo.tablo[y-1][x]==0, (x,y), (x,y-1))
                     continue
-                else:
+                elif not (x,y-1) in self.positions[self.orient]:
+                    print('Non, Bas | case 0', tablo.tablo[y-1][x]==0, (x,y), (x,y-1))
                     peutDescendre = False
                     break
             if peutDescendre:
@@ -71,9 +72,11 @@ class newBlock:
         elif direction == 'DROITE':
             peutDroite = True
             for (x,y) in self.positions[self.orient]:
-                if x<9 and tablo.tablo[y][x+1]==0:
+                if x<9 and (not (x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
+                    print('Oui, Droite')
                     continue
                 else:
+                    print('Non, Droite')
                     peutDroite = False
                     break
             if peutDroite:
@@ -86,9 +89,11 @@ class newBlock:
         elif direction=='GAUCHE':
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x>1 and tablo.tablo[y][x-1]==0:
+                if x>1 and (not (x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                    print('Oui, Gauche')
                     continue
                 else:
+                    print('Non, Gauche')
                     peutGauche = False
                     break
             if peutGauche:
@@ -101,16 +106,16 @@ class newBlock:
 
     def rotation(self, forme, tablo):
         # test de possibilité de rotation + update positions
-        if self.forme=='carre':
-            pass       # si c'est un carre pas besoin de tourner (c'est pas pass faut changer)
-        elif self.forme==('elleG' or 'elleD' or 'leThe'):
-            t = ['DOWN','RIGHT','UP','RIGHT']
+        if self.forme == 'carre':
+            return       # si c'est un carre pas besoin de tourner
+        elif self.forme == ('elleG' or 'elleD' or 'leThe'):
+            t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
         orientation = t.index(self.orient)-1
         peutTourner = True
-        for (x,y) in self.positions[t[orientation-1]]:
-            if 0<x<11 and y>0 and tablo.tablo[y][x]==0:
+        for (x,y) in self.positions[t[orientation]]:
+            if 0<x<11 and y>0 and (not (x,y) in self.positions[t[orientation]] or tablo.tablo[y][x]==0):
                 continue
             else:
                 peutTourner = False

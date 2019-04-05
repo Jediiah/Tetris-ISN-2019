@@ -1,0 +1,38 @@
+Bas True
+Oui, Bas | case 0 True (7, 19) (7, 18)
+Bas True
+Oui, Bas | case 0 True (5, 18) (5, 17)
+Bas True
+Oui, Bas | case 0 True (6, 19) (6, 18)
+Bas False
+Oui, Gauche
+Oui, Gauche
+Oui, Gauche
+Oui, Gauche
+Bas True
+Oui, Bas | case 0 True (0, 11) (0, 10)
+Bas True
+Oui, Bas | case 0 True (-1, 11) (-1, 10)
+Bas True
+Oui, Bas | case 0 True (-2, 11) (-2, 10)
+Bas True
+Oui, Bas | case 0 True (-3, 11) (-3, 10)
+Oui, Droite
+Oui, Droite
+Oui, Droite
+Oui, Droite
+Bas True
+Oui, Bas | case 0 True (2, 3) (2, 2)
+Bas True
+Oui, Bas | case 0 True (3, 3) (3, 2)
+Bas True
+Oui, Bas | case 0 True (4, 3) (4, 2)
+Bas True
+Oui, Bas | case 0 True (5, 3) (5, 2)
+Oui, Gauche
+Oui, Gauche
+Oui, Gauche
+Oui, Gauche
+Bas True
+Non, Bas | case 0 True (0, -5) (0, -6)
+Non, Droite
