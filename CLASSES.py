@@ -55,8 +55,10 @@ class newBlock:
             peutDescendre = True
             for (x,y) in self.positions[self.orient]:
                 if y>0 and tablo.tablo[y-1][x]==0:
+                    print('Oui, Bas')
                     continue
                 else:
+                    print('Non, Bas')
                     peutDescendre = False
                     break
             if peutDescendre:
@@ -72,8 +74,10 @@ class newBlock:
             peutDroite = True
             for (x,y) in self.positions[self.orient]:
                 if x<9 and tablo.tablo[y][x+1]==0:
+                    print('Oui, Droite')
                     continue
                 else:
+                    print('Non, Droite')
                     peutDroite = False
                     break
             if peutDroite:
@@ -87,8 +91,10 @@ class newBlock:
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
                 if x>1 and tablo.tablo[y][x-1]==0:
+                    print('Oui, Gauche')
                     continue
                 else:
+                    print('Non, Gauche')
                     peutGauche = False
                     break
             if peutGauche:
@@ -102,7 +108,7 @@ class newBlock:
     def rotation(self, forme, tablo):
         # test de possibilité de rotation + update positions
         if self.forme=='carre':
-            pass       # si c'est un carre pas besoin de tourner (c'est pas pass faut changer)
+            return       # si c'est un carre pas besoin de tourner (c'est pas pass faut changer)
         elif self.forme==('elleG' or 'elleD' or 'leThe'):
             t = ['DOWN','RIGHT','UP','RIGHT']
         else:

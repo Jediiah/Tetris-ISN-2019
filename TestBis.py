@@ -247,6 +247,7 @@ while not done:
 
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
+                tabloJeu.isvide = False
 
             pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
@@ -272,7 +273,7 @@ while not done:
             for i in range(20):
                 for j in range(10):
                     if tabloJeu.tablo[i][j] != 0:
-                        platoJeu.blit(CONST.lesImages[blocTombe.forme],(j*30, 600-(i+1)*30))
+                        platoJeu.blit(CONST.lesImages[tabloJeu.tablo[i][j]],(j*30, 600-(i+1)*30))
                         
             
             
