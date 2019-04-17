@@ -105,6 +105,7 @@ class newBlock:
 
 
     def rotation(self, forme, tablo):
+        print(self.orient, "||||||")
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
@@ -112,19 +113,19 @@ class newBlock:
             t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
-        orientation = t.index(self.orient)-1
+        orientation = t[t.index(self.orient)-1]
         peutTourner = True
-        for (x,y) in self.positions[t[orientation]]:
-            if 0<x<11 and y>0 and (not (x,y) in self.positions[t[orientation]] or tablo.tablo[y][x]==0):
+        for (x,y) in self.positions[orientation]:
+            if 0<x<11 and y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
                 continue
             else:
                 peutTourner = False
                 break
         if peutTourner:
             posAvant = self.positions[self.orient].copy()
-            self.orient = t[orientation]
-            tablo.update(posAvant, self.positions[self.orient])
-
+            self.orient = orientation
+            tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
+        print(self.orient)
 
 def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
     for (x,y) in forme:
