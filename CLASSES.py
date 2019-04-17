@@ -90,7 +90,7 @@ class newBlock:
             peutGauche = True
             print("Gauche")
             for (x,y) in self.positions[self.orient]:
-                if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                if x>0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
                 else:
                     peutGauche = False
@@ -116,7 +116,7 @@ class newBlock:
         orientation = t[t.index(self.orient)-1]
         peutTourner = True
         for (x,y) in self.positions[orientation]:
-            if 0<x<11 and y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
+            if 0<x<11 and y>0 and ((x,y) in self.positions[self.orient] or tablo.tablo[y][x]==0):
                 continue
             else:
                 peutTourner = False
