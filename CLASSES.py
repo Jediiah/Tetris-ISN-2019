@@ -52,8 +52,8 @@ class newBlock:
         if direction == 'BAS':
             peutDescendre = True
             for (x,y) in self.positions[self.orient]:
-                print('Bas', not (x,y-1) in self.positions[self.orient])
-                if y>0 and (not (x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
+                print('Bas', (x,y-1) in self.positions[self.orient])
+                if y>0 and ((x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
                     print('Oui, Bas | case 0', tablo.tablo[y-1][x]==0, (x,y), (x,y-1))
                     continue
                 elif not (x,y-1) in self.positions[self.orient]:
@@ -64,7 +64,8 @@ class newBlock:
                 posAvant = self.positions[self.orient].copy()
                 for cle in self.positions.keys():
                     for i in range(4):
-                        self.positions[cle][i] = (x,y) = (x,y-1)
+                        (x,y) = self.positions[cle][i] 
+                        self.positions[cle][i] = (x,y-1)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
                 tablo.update(estArrive=True)    # les argument à revoir
@@ -72,7 +73,7 @@ class newBlock:
         elif direction == 'DROITE':
             peutDroite = True
             for (x,y) in self.positions[self.orient]:
-                if x<9 and (not (x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
+                if x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
                     print('Oui, Droite')
                     continue
                 else:
@@ -83,13 +84,14 @@ class newBlock:
                 posAvant = self.positions[self.orient].copy()
                 for cle in self.positions.keys():
                     for i in range(4):
-                        self.positions[cle][i] = (x,y) = (x+1,y)
+                        (x,y) = self.positions[cle][i] 
+                        self.positions[cle][i] = (x+1,y)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x>1 and (not (x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     print('Oui, Gauche')
                     continue
                 else:
@@ -100,7 +102,8 @@ class newBlock:
                 posAvant = self.positions[self.orient].copy()
                 for cle in self.positions.keys():
                     for i in range(4):
-                        self.positions[cle][i] = (x,y) = (x-1,y)
+                        (x,y) = self.positions[cle][i] 
+                        self.positions[cle][i] = (x-1,y)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 

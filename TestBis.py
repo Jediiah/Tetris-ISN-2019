@@ -241,6 +241,7 @@ while not done:
         
         tabloJeu = CLASSES.tablo()
         gravite = pygame.USEREVENT + 1
+        pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
         while windows==1:
@@ -248,8 +249,6 @@ while not done:
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
                 tabloJeu.isvide = False
-
-            pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -270,6 +269,7 @@ while not done:
 
             tabloJeu.test()
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
+            screen.blit(image, position)
             for i in range(20):
                 for j in range(10):
                     if tabloJeu.tablo[i][j] != 0:
