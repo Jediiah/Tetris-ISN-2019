@@ -49,15 +49,14 @@ class newBlock:
         
         
     def deplacement(self,direction,tablo):
+
         if direction == 'BAS':
             peutDescendre = True
+            print("BAS")
             for (x,y) in self.positions[self.orient]:
-                print('Bas', (x,y-1) in self.positions[self.orient])
                 if y>0 and ((x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
-                    print('Oui, Bas | case 0', tablo.tablo[y-1][x]==0, (x,y), (x,y-1))
                     continue
                 elif not (x,y-1) in self.positions[self.orient]:
-                    print('Non, Bas | case 0', tablo.tablo[y-1][x]==0, (x,y), (x,y-1))
                     peutDescendre = False
                     break
             if peutDescendre:
@@ -72,12 +71,11 @@ class newBlock:
             
         elif direction == 'DROITE':
             peutDroite = True
+            print("Droite")
             for (x,y) in self.positions[self.orient]:
                 if x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
-                    print('Oui, Droite')
                     continue
                 else:
-                    print('Non, Droite')
                     peutDroite = False
                     break
             if peutDroite:
@@ -90,12 +88,11 @@ class newBlock:
 
         elif direction=='GAUCHE':
             peutGauche = True
+            print("Gauche")
             for (x,y) in self.positions[self.orient]:
                 if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
-                    print('Oui, Gauche')
                     continue
                 else:
-                    print('Non, Gauche')
                     peutGauche = False
                     break
             if peutGauche:
