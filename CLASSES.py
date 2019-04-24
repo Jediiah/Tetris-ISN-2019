@@ -105,14 +105,16 @@ class newBlock:
 
 
     def rotation(self, forme, tablo):
-        print(self.orient, "||||||")
+        print(self.orient, self.forme)
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
         elif self.forme == ('elleG' or 'elleD' or 'leThe'):
-            t = ['DOWN','RIGHT','UP','LEFT']
+            print(1)
+            t = ['DOWN','RIGHT','UP','LEFT','DOWN']
         else:
             t = ['DOWN', 'UP']
+        print(t)
         orientation = t[t.index(self.orient)-1]
         peutTourner = True
         for (x,y) in self.positions[orientation]:
