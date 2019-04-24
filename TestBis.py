@@ -1,5 +1,6 @@
 import pygame, pygame.mixer, os.path
 import pygame.locals
+from copy import deepcopy
 from random import randint
 import CLASSES, CONST
 
@@ -13,20 +14,26 @@ def SelecBloc():
     a = randint(0,6)
     blocTombe = None
     if a==0:
-	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
+        blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
+        print(CONST.carre)
     elif a==1:
-	    blocTombe = CLASSES.newBlock('laBarre', CONST.laBarre, tabloJeu)
+        blocTombe = CLASSES.newBlock('laBarre', deepcopy(CONST.laBarre), tabloJeu)
+        print(CONST.laBarre)
     elif a==2:
-	    blocTombe = CLASSES.newBlock('leThe', CONST.leThe, tabloJeu)
+        blocTombe = CLASSES.newBlock('leThe', deepcopy(CONST.leThe), tabloJeu)
+        print(CONST.leThe)
     elif a==3:
-	    blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
+        blocTombe = CLASSES.newBlock('eclaireD', deepcopy(CONST.eclaireD), tabloJeu)
+        print(CONST.eclaireD)
     elif a==4:
-	    blocTombe = CLASSES.newBlock('eclaireG', CONST.eclaireG, tabloJeu)
+        blocTombe = CLASSES.newBlock('eclaireG', deepcopy(CONST.eclaireG), tabloJeu)
+        print(CONST.eclaireG)
     elif a==5:
-	    blocTombe = CLASSES.newBlock('elleD', CONST.elleD, tabloJeu)
+        blocTombe = CLASSES.newBlock('elleD', deepcopy(CONST.elleD), tabloJeu)
+        print(CONST.elleD)
     elif a==6:
-	    blocTombe = CLASSES.newBlock('elleG', CONST.elleG, tabloJeu)
-    return(blocTombe)
+        blocTombe = CLASSES.newBlock('elleG', deepcopy(CONST.elleD), tabloJeu)
+        print(CONST.elleG)
 
 
 #'''================================================================================================='''
@@ -241,7 +248,6 @@ while not done:
         platoJeu = screen.subsurface(47,4,347,604)
         
         tabloJeu = CLASSES.tablo()
-        blocTombe = None
         gravite = pygame.USEREVENT + 1
         pygame.time.set_timer(gravite,400) # on descend une fois par seconde (peut etre accelerer)
 
@@ -249,8 +255,11 @@ while not done:
         while windows==1:
 
             if tabloJeu.isvide:
-                blocTombe = SelecBloc()
+                blocTombe = None
+                SelecBloc()
                 tabloJeu.isvide = False
+                print(blocTombe.forme)
+                print(blocTombe.positions)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

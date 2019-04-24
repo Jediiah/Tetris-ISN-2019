@@ -65,6 +65,13 @@ class tablo:
 class newBlock:
 
     def __init__(self, laForme, forme, tablo):
+        '''
+            Le bloc qui bouge
+
+            :param laForme str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation
+            :param forme  dict, les positions du bloc pour chaque rotation sert pour initialiser la position et pour reperer le bloc lors de deplacement et de rotation
+            :param tablo un objet de la classe tablo (au dessus) dont on utilise le tablo pour tester les positions.
+        '''
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
         self.orient = 'DOWN'
@@ -91,11 +98,11 @@ class newBlock:
                         self.positions[cle][i] = (x,y-1)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
+                print('_______', self.forme, '\n', self.positions)
                 tablo.update(estArrive=True, formestr=self.forme, positionsAvant=self.positions[self.orient])
             
         elif direction == 'DROITE':
             peutDroite = True
-            print("Droite")
             for (x,y) in self.positions[self.orient]:
                 if 0<=x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
                     continue
@@ -112,7 +119,6 @@ class newBlock:
 
         elif direction=='GAUCHE':
             peutGauche = True
-            print("Gauche")
             for (x,y) in self.positions[self.orient]:
                 if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
@@ -129,16 +135,13 @@ class newBlock:
 
 
     def rotation(self, forme, tablo):
-        print(self.orient, self.forme)
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
         elif self.forme=='elleG' or self.forme=='elleD' or self.forme=='leThe':
-            print(1)
             t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
-        print(t)
         orientation = t[t.index(self.orient)-1]
         peutTourner = True
         for (x,y) in self.positions[orientation]:
@@ -151,7 +154,6 @@ class newBlock:
             posAvant = self.positions[self.orient].copy()
             self.orient = orientation
             tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
-        print(self.orient)
 
         
 
