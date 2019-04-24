@@ -1,6 +1,29 @@
 import pygame
 import CONST
 
+
+def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
+    for (x,y) in forme:
+        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
+    return(forme)
+
+def give_couleur(forme):
+    if forme=='carre':
+        return('Jaune')
+    elif forme=='laBarre':
+        return('Bleu')
+    elif forme=='leThe':
+        return('Bleu')  #Violet apres
+    elif forme=='eclaireD':
+        return('Vert')
+    elif forme=='eclaireG':
+        return('Orange')
+    elif forme=='elleD':
+        return('Rouge')
+    elif forme=='elleG':
+        return('Rose')
+
+
 class tablo:
 
     def __init__(self):
@@ -130,28 +153,6 @@ class newBlock:
             tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
         print(self.orient)
 
-def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
-    for (x,y) in forme:
-        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
-    return(forme)
-
-def give_couleur(forme):
-    if forme=='carre':
-        return('Jaune')
-    elif forme=='laBarre':
-        return('Bleu')
-    elif forme=='leThe':
-        return('Violet')
-    elif forme=='eclaireD':
-        return('Vert')
-    elif forme=='eclaireG':
-        return('Orange')
-    elif forme=='elleD':
-        return('Rouge')
-    elif forme=='elleG':
-        return('Rose')
-
-    
         
 
 
