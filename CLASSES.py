@@ -52,7 +52,6 @@ class newBlock:
 
         if direction == 'BAS':
             peutDescendre = True
-            print("BAS")
             for (x,y) in self.positions[self.orient]:
                 if y>0 and ((x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
                     continue
@@ -109,9 +108,9 @@ class newBlock:
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
-        elif self.forme == ('elleG' or 'elleD' or 'leThe'):
+        elif self.forme=='elleG' or self.forme=='elleD' or self.forme=='leThe':
             print(1)
-            t = ['DOWN','RIGHT','UP','LEFT','DOWN']
+            t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
         print(t)
