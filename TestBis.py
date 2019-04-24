@@ -9,8 +9,9 @@ pygame.init()
 
 # selection aleatoire de bloc
 def SelecBloc():
-    global tabloJeu
+    global tabloJeu, blocTombe
     a = randint(0,6)
+    blocTombe = None
     if a==0:
 	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
     elif a==1:
@@ -240,8 +241,9 @@ while not done:
         platoJeu = screen.subsurface(47,4,347,604)
         
         tabloJeu = CLASSES.tablo()
+        blocTombe = None
         gravite = pygame.USEREVENT + 1
-        pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
+        pygame.time.set_timer(gravite,400) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
         while windows==1:
@@ -253,6 +255,7 @@ while not done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
+                    windows = 0
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                     done = True
                     windows = 0

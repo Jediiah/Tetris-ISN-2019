@@ -32,6 +32,8 @@ class tablo:
                 self.tablo[yApres][xApres] = formestr # + la couleur
             self.isvide = False
         else:
+            for (x,y) in positionsAvant:
+                self.tablo[y][x] = give_couleur(formestr)
             self.isvide = True
 
 
@@ -66,15 +68,15 @@ class newBlock:
                         self.positions[cle][i] = (x,y-1)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
-                tablo.update(estArrive=True)    # les argument à revoir
+                tablo.update(estArrive=True, formestr=self.forme, positionsAvant=self.positions[self.orient])
             
         elif direction == 'DROITE':
             peutDroite = True
             print("Droite")
             for (x,y) in self.positions[self.orient]:
-                if x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
+                if 0<=x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
                     continue
-                else:
+                elif not (x+1,y) in self.positions[self.orient]:
                     peutDroite = False
                     break
             if peutDroite:
@@ -91,7 +93,7 @@ class newBlock:
             for (x,y) in self.positions[self.orient]:
                 if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
-                else:
+                elif not (x+1,y) in self.positions[self.orient]:
                     peutGauche = False
                     break
             if peutGauche:
@@ -117,7 +119,7 @@ class newBlock:
         orientation = t[t.index(self.orient)-1]
         peutTourner = True
         for (x,y) in self.positions[orientation]:
-            if 0<x<11 and y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
+            if 0<x<11 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
                 continue
             else:
                 peutTourner = False
@@ -132,6 +134,22 @@ def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est 
     for (x,y) in forme:
         tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
     return(forme)
+
+def give_couleur(forme):
+    if forme=='carre':
+        return('Jaune')
+    elif forme=='laBarre':
+        return('Bleu')
+    elif forme=='leThe':
+        return('Violet')
+    elif forme=='eclaireD':
+        return('Vert')
+    elif forme=='eclaireG':
+        return('Orange')
+    elif forme=='elleD':
+        return('Rouge')
+    elif forme=='elleG':
+        return('Rose')
 
     
         
