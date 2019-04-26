@@ -42,10 +42,14 @@ class tablo:
     # Actualise le tablo, les scores/combos
     def test(self):
         combo = 0
-        for i in range(20): # remplacer len jailaflemmedecompter
+        for i in range(20): 
             if not 0 in self.tablo[i]:
                 for j in range(i,19):
-                    self.tablo[j] = self.tablo[j+1] # ca marche paa 
+                    if self.tablo[j]!=[0,0,0,0,0,0,0,0,0,0]:
+                        tempLigne = self.tablo[j+1].copy()
+                        self.tablo[j] = tempLigne
+                    else:
+                        break
                 self.score += 10 # a changer
                 combo += 1
                 i -= 1
