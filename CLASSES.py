@@ -23,6 +23,13 @@ def give_couleur(forme):
     elif forme=='elleG':
         return('Rose')
 
+def test_rotation_coromp(les_positions):
+        for (x,y) in les_positions:
+            if 0>x or x>9 or y<0 or y>19:
+                return(True)     
+
+
+
 
 class tablo:
 
@@ -35,7 +42,7 @@ class tablo:
     # Actualise le tablo, les scores/combos
     def test(self):
         combo = 0
-        for i in range(len(self.tablo)): # remplacer len jailaflemmedecompter
+        for i in range(20): # remplacer len jailaflemmedecompter
             if not 0 in self.tablo[i]:
                 for j in range(i,19):
                     self.tablo[j] = self.tablo[j+1] # ca marche paa 
@@ -52,7 +59,7 @@ class tablo:
             for (xAvant,yAvant) in positionsAvant:
                 self.tablo[yAvant][xAvant] = 0
             for (xApres,yApres) in positionsApres:
-                self.tablo[yApres][xApres] = formestr # + la couleur
+                self.tablo[yApres][xApres] = formestr 
             self.isvide = False
         else:
             for (x,y) in positionsAvant:
@@ -68,7 +75,7 @@ class newBlock:
         '''
             Le bloc qui bouge
 
-            :param laForme str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation
+            :param laForme str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation. Sert aussi à donner la couleur (ref)
             :param forme  dict, les positions du bloc pour chaque rotation sert pour initialiser la position et pour reperer le bloc lors de deplacement et de rotation
             :param tablo un objet de la classe tablo (au dessus) dont on utilise le tablo pour tester les positions.
         '''
@@ -78,7 +85,8 @@ class newBlock:
         self.forme = laForme
         self.jsp = give_position(forme[self.orient], self.forme, tablo)
         self.positions = forme
-        
+        self.rotationCorompue = []
+
         
     def deplacement(self,direction,tablo):
 
@@ -96,9 +104,15 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x,y-1)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
-                print('_______', self.forme, '\n', self.positions)
                 tablo.update(estArrive=True, formestr=self.forme, positionsAvant=self.positions[self.orient])
             
         elif direction == 'DROITE':
@@ -115,12 +129,19 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x+1,y)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x>1 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                if x>0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
                 elif not (x+1,y) in self.positions[self.orient]:
                     peutGauche = False
@@ -131,6 +152,13 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x-1,y)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 
@@ -143,13 +171,15 @@ class newBlock:
         else:
             t = ['DOWN', 'UP']
         orientation = t[t.index(self.orient)-1]
-        peutTourner = True
-        for (x,y) in self.positions[orientation]:
-            if 0<x<11 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
-                continue
-            else:
-                peutTourner = False
-                break
+        peutTourner = False
+        if not orientation in self.rotationCorompue:
+            peutTourner = True
+            for (x,y) in self.positions[orientation]:
+                if 0<x<11 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
+                    continue
+                else:
+                    peutTourner = False
+                    break
         if peutTourner:
             posAvant = self.positions[self.orient].copy()
             self.orient = orientation
