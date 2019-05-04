@@ -15,32 +15,18 @@ def SelecBloc():
     blocTombe = None
     if a==0:
         blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
-        print(CONST.carre)
-        print(" ")
     elif a==1:
         blocTombe = CLASSES.newBlock('laBarre', deepcopy(CONST.laBarre), tabloJeu)
-        print(CONST.laBarre)
-        print(" ")
     elif a==2:
         blocTombe = CLASSES.newBlock('leThe', deepcopy(CONST.leThe), tabloJeu)
-        print(CONST.leThe)
-        print(" ")
     elif a==3:
         blocTombe = CLASSES.newBlock('eclaireD', deepcopy(CONST.eclaireD), tabloJeu)
-        print(CONST.eclaireD)
-        print(" ")
     elif a==4:
         blocTombe = CLASSES.newBlock('eclaireG', deepcopy(CONST.eclaireG), tabloJeu)
-        print(CONST.eclaireG)
-        print(" ")
     elif a==5:
         blocTombe = CLASSES.newBlock('elleD', deepcopy(CONST.elleD), tabloJeu)
-        print(CONST.elleD)
-        print(" ")
     elif a==6:
         blocTombe = CLASSES.newBlock('elleG', deepcopy(CONST.elleD), tabloJeu)
-        print(CONST.elleG)
-        print(" ")
 
 
 #'''================================================================================================='''

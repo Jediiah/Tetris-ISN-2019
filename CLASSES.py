@@ -174,12 +174,15 @@ class newBlock:
             t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
-        orientation = t[t.index(self.orient)-1]
+        for i in range(len(t)):
+            orientation = t[t.index(self.orient)-(1+i)]
+            if not orientation in self.rotationCorompue:
+                break
         peutTourner = False
         if not orientation in self.rotationCorompue:
             peutTourner = True
             for (x,y) in self.positions[orientation]:
-                if 0<x<11 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
+                if 0<x<10 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
                     continue
                 else:
                     peutTourner = False
