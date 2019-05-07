@@ -230,7 +230,6 @@ while not done:
 
     elif windows==1:
 
-       #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
         image = pygame.image.load("Images/nvoLeJeu.png")

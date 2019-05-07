@@ -44,7 +44,7 @@ class tablo:
         combo = 0
         for i in range(20): 
             if not 0 in self.tablo[i]:
-                for j in range(i,19):
+                for j in range(i,20):
                     if self.tablo[j]!=[0,0,0,0,0,0,0,0,0,0]:
                         tempLigne = self.tablo[j+1].copy()
                         self.tablo[j] = tempLigne
