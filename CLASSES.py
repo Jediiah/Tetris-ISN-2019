@@ -47,7 +47,7 @@ class tablo:
                 for j in range(i,20):
                     if self.tablo[j]!=[0,0,0,0,0,0,0,0,0,0]:
                         tempLigne = self.tablo[j+1].copy()
-                        self.tablo[j] = tempLigne
+                        self.tablo[j] = tempLigne.copy()
                     else:
                         break
                 self.score += 10 # a changer
@@ -69,19 +69,34 @@ class tablo:
             for (x,y) in positionsAvant:
                 self.tablo[y][x] = give_couleur(formestr)
             self.isvide = True
+            self.test()
 
 
 
 
 class newBlock:
+    '''
+        Le bloc qui et en train de tomber et que l'on dirige
+
+        Dans cette classe on peut trouver toute les valeures temporaire du bloc 
+        ainsi que les fonctions qui permettent de le déplacer et de le faire tourner
+    '''
 
     def __init__(self, laForme, forme, tablo):
         '''
-            Le bloc qui bouge
+            Initialisation du nouveau bloc
 
-            :param laForme str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation. Sert aussi à donner la couleur (ref)
-            :param forme  dict, les positions du bloc pour chaque rotation sert pour initialiser la position et pour reperer le bloc lors de deplacement et de rotation
-            :param tablo un objet de la classe tablo (au dessus) dont on utilise le tablo pour tester les positions.
+            Donne au nouveau bloc ses valeurs initiales:
+            son orientation initiale, sa forme, initialisation de sa position initiale dans le tablo (ref give_position),
+            ses position en fontion de son orientaiton, ses 'rotations corompues' (ref un paragrafe)
+             
+
+            :param laForme: str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation. Sert aussi à donner la couleur (ref)
+            :param forme:  dict, les positions du bloc pour chaque rotation sert pour initialiser la position et pour reperer le bloc lors de deplacement et de rotation
+            :param tablo: un objet de la classe tablo (au dessus) dont on utilise le tablo pour tester les positions.
+            :type laForme: str
+            :type forme: dict
+            :type tablo: tablo
         '''
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
@@ -93,6 +108,19 @@ class newBlock:
 
         
     def deplacement(self,direction,tablo):
+        '''
+            La fonction déplacement est appelée lorsqu'on le demande (les flêches) ou autaumatiquement pour BAS (ref gravité) (ref explication détaillée)
+
+            Cette fonction est appelée quelle que soit la direction voulue:
+                si la direction voulue est GAUCHE ou DROITE la fonction teste si le bloc est restera dans le tablo principal (ref explication détaillée)
+                si la direction voulue est BAS la fonction fait la même chose mais si le bloc à atteint le bas la fontion renvoi l'information (ref tablo.update)
+
+
+            :param direction: la direction voulue lorsqu'on appelle la fonction
+            :param tablo: le tablo dans lequel se trouve le jeu (ref tablo)
+            :type direction: str
+            :type tablo: tablo   
+        '''
 
         if direction == 'BAS':
             peutDescendre = True
@@ -166,7 +194,14 @@ class newBlock:
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 
-    def rotation(self, forme, tablo):
+    def rotation(self, tablo):
+        '''
+            La fonction rotation est appelée lorqu'on appuie sur la fleche du haut et teste si la rotation du bloc vers la gauche est possible.
+            (ref rotation détail)
+
+            D'abord la fonction trouve les rotations possible en fonction de la forme.
+            Esuite 
+        '''
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
