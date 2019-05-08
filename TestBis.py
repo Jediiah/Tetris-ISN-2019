@@ -58,6 +58,7 @@ bt4 = x_bt4, y_bt4= (345, 550)  # Quitter
 
 #images associées:  ****************************************
 Presentation = pygame.image.load("Images/FIRST.png")
+GameOver = pygame.image.load("Images/gameoverteris.jpg")
 
 		# titre Tetris:
 T0 = pygame.image.load("Images/Tetris_0.png")
@@ -244,7 +245,7 @@ while not done:
         pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
-        while windows==1:
+        while windows==1 and tabloJeu.gameOver==True:
 
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
@@ -279,6 +280,19 @@ while not done:
             
             pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
             clock.tick(5) # limite la vitesse de boucle
+
+
+        gameover = 1
+        while gameover==1:
+            platoJeu.blit(GameOver, (220,336))
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key==(pygame.K_BACKSPACE or pygame.K_ESCAPE):
+                    gameover = 0 # retour au menu
+
+            pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
+            clock.tick(30) # limite la vitesse de boucle
+
 
 #'''================================================================================================='''
 #'''========================    Fin du TETRIS   ====================================================='''

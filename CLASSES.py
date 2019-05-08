@@ -15,7 +15,10 @@ def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est 
         :type tablo: tablo
     '''
     for (x,y) in forme:
-        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
+        if tablo.tablo[y][x] == 0:
+            tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
+        else:
+            tablo.gameOver = True
 
 
 def give_couleur(forme):
@@ -70,6 +73,7 @@ class tablo:
         self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
         self.score = 0
         self.isvide = True
+        self.gameOver = False
         
     
     # Actualise le tablo, les scores/combos
@@ -83,13 +87,14 @@ class tablo:
                         self.tablo[j] = tempLigne.copy()
                     else:
                         break
-                self.score += 10 # a changer
                 combo += 1
                 i -= 1
 
-        if combo >= 4:
-            self.score = 10  # a changer
-        # a continuer pour les combos et les scores
+                if combo >= 4:  # le gain de score est totalement arbitraire meme si basé sur le Tetris original
+                    self.score += 800 + combo*100
+                else:
+                    self.score += combo*100
+    
 
     def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
         if not estArrive:
