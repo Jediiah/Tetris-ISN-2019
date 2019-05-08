@@ -1,5 +1,6 @@
 import pygame, pygame.mixer, os.path
 import pygame.locals
+from copy import deepcopy
 from random import randint
 import CLASSES, CONST
 
@@ -9,23 +10,23 @@ pygame.init()
 
 # selection aleatoire de bloc
 def SelecBloc():
-    global tabloJeu
+    global tabloJeu, blocTombe
     a = randint(0,6)
+    blocTombe = None
     if a==0:
-	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
+        blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
     elif a==1:
-	    blocTombe = CLASSES.newBlock('laBarre', CONST.laBarre, tabloJeu)
+        blocTombe = CLASSES.newBlock('laBarre', deepcopy(CONST.laBarre), tabloJeu)
     elif a==2:
-	    blocTombe = CLASSES.newBlock('leThe', CONST.leThe, tabloJeu)
+        blocTombe = CLASSES.newBlock('leThe', deepcopy(CONST.leThe), tabloJeu)
     elif a==3:
-	    blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
+        blocTombe = CLASSES.newBlock('eclaireD', deepcopy(CONST.eclaireD), tabloJeu)
     elif a==4:
-	    blocTombe = CLASSES.newBlock('eclaireG', CONST.eclaireG, tabloJeu)
+        blocTombe = CLASSES.newBlock('eclaireG', deepcopy(CONST.eclaireG), tabloJeu)
     elif a==5:
-	    blocTombe = CLASSES.newBlock('elleD', CONST.elleD, tabloJeu)
+        blocTombe = CLASSES.newBlock('elleD', deepcopy(CONST.elleD), tabloJeu)
     elif a==6:
-	    blocTombe = CLASSES.newBlock('elleG', CONST.elleG, tabloJeu)
-    return(blocTombe)
+        blocTombe = CLASSES.newBlock('elleG', deepcopy(CONST.elleD), tabloJeu)
 
 
 #'''================================================================================================='''
@@ -229,7 +230,6 @@ while not done:
 
     elif windows==1:
 
-       #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
         image = pygame.image.load("Images/nvoLeJeu.png")
@@ -241,18 +241,20 @@ while not done:
         
         tabloJeu = CLASSES.tablo()
         gravite = pygame.USEREVENT + 1
-        pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
+        pygame.time.set_timer(gravite,400) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
         while windows==1:
 
             if tabloJeu.isvide:
-                blocTombe = SelecBloc()
+                blocTombe = None
+                SelecBloc()
                 tabloJeu.isvide = False
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
+                    windows = 0
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                     done = True
                     windows = 0
@@ -267,7 +269,7 @@ while not done:
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
-            tabloJeu.test()
+
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             screen.blit(image, position)
             for i in range(20):

@@ -1,6 +1,36 @@
 import pygame
 import CONST
 
+
+def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
+    for (x,y) in forme:
+        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
+    return(forme)
+
+def give_couleur(forme):
+    if forme=='carre':
+        return('Jaune')
+    elif forme=='laBarre':
+        return('Bleu')
+    elif forme=='leThe':
+        return('Bleu')  #Violet apres
+    elif forme=='eclaireD':
+        return('Vert')
+    elif forme=='eclaireG':
+        return('Orange')
+    elif forme=='elleD':
+        return('Rouge')
+    elif forme=='elleG':
+        return('Rose')
+
+def test_rotation_coromp(les_positions):
+        for (x,y) in les_positions:
+            if 0>x or x>9 or y<0 or y>19:
+                return(True)     
+
+
+
+
 class tablo:
 
     def __init__(self):
@@ -12,10 +42,14 @@ class tablo:
     # Actualise le tablo, les scores/combos
     def test(self):
         combo = 0
-        for i in range(len(self.tablo)): # remplacer len jailaflemmedecompter
+        for i in range(20): 
             if not 0 in self.tablo[i]:
-                for j in range(i,19):
-                    self.tablo[j] = self.tablo[j+1] # ca marche paa 
+                for j in range(i,20):
+                    if self.tablo[j]!=[0,0,0,0,0,0,0,0,0,0]:
+                        tempLigne = self.tablo[j+1].copy()
+                        self.tablo[j] = tempLigne.copy()
+                    else:
+                        break
                 self.score += 10 # a changer
                 combo += 1
                 i -= 1
@@ -29,30 +63,67 @@ class tablo:
             for (xAvant,yAvant) in positionsAvant:
                 self.tablo[yAvant][xAvant] = 0
             for (xApres,yApres) in positionsApres:
-                self.tablo[yApres][xApres] = formestr # + la couleur
+                self.tablo[yApres][xApres] = formestr 
             self.isvide = False
         else:
+            for (x,y) in positionsAvant:
+                self.tablo[y][x] = give_couleur(formestr)
             self.isvide = True
+            self.test()
 
 
 
 
 class newBlock:
+    '''
+        Le bloc qui et en train de tomber et que l'on dirige
+
+        Dans cette classe on peut trouver toute les valeures temporaire du bloc 
+        ainsi que les fonctions qui permettent de le déplacer et de le faire tourner
+    '''
 
     def __init__(self, laForme, forme, tablo):
+        '''
+            Initialisation du nouveau bloc
+
+            Donne au nouveau bloc ses valeurs initiales:
+            son orientation initiale, sa forme, initialisation de sa position initiale dans le tablo (ref give_position),
+            ses position en fontion de son orientaiton, ses 'rotations corompues' (ref un paragrafe)
+             
+
+            :param laForme: str, c'est la forme du bloc qu'on appel et sert a initialiser la position et a la rotation. Sert aussi à donner la couleur (ref)
+            :param forme:  dict, les positions du bloc pour chaque rotation sert pour initialiser la position et pour reperer le bloc lors de deplacement et de rotation
+            :param tablo: un objet de la classe tablo (au dessus) dont on utilise le tablo pour tester les positions.
+            :type laForme: str
+            :type forme: dict
+            :type tablo: tablo
+        '''
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
         self.orient = 'DOWN'
         self.forme = laForme
         self.jsp = give_position(forme[self.orient], self.forme, tablo)
         self.positions = forme
-        
+        self.rotationCorompue = []
+
         
     def deplacement(self,direction,tablo):
+        '''
+            La fonction déplacement est appelée lorsqu'on le demande (les flêches) ou autaumatiquement pour BAS (ref gravité) (ref explication détaillée)
+
+            Cette fonction est appelée quelle que soit la direction voulue:
+                si la direction voulue est GAUCHE ou DROITE la fonction teste si le bloc est restera dans le tablo principal (ref explication détaillée)
+                si la direction voulue est BAS la fonction fait la même chose mais si le bloc à atteint le bas la fontion renvoi l'information (ref tablo.update)
+
+
+            :param direction: la direction voulue lorsqu'on appelle la fonction
+            :param tablo: le tablo dans lequel se trouve le jeu (ref tablo)
+            :type direction: str
+            :type tablo: tablo   
+        '''
 
         if direction == 'BAS':
             peutDescendre = True
-            print("BAS")
             for (x,y) in self.positions[self.orient]:
                 if y>0 and ((x,y-1) in self.positions[self.orient] or tablo.tablo[y-1][x]==0):
                     continue
@@ -65,17 +136,23 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x,y-1)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient]) 
             else:
-                tablo.update(estArrive=True)    # les argument à revoir
+                tablo.update(estArrive=True, formestr=self.forme, positionsAvant=self.positions[self.orient])
             
         elif direction == 'DROITE':
             peutDroite = True
-            print("Droite")
             for (x,y) in self.positions[self.orient]:
-                if x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
+                if 0<=x<9 and ((x+1,y) in self.positions[self.orient] or tablo.tablo[y][x+1]==0):
                     continue
-                else:
+                elif not (x+1,y) in self.positions[self.orient]:
                     peutDroite = False
                     break
             if peutDroite:
@@ -84,15 +161,21 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x+1,y)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
         elif direction=='GAUCHE':
             peutGauche = True
-            print("Gauche")
             for (x,y) in self.positions[self.orient]:
                 if x>0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
-                else:
+                elif not (x+1,y) in self.positions[self.orient]:
                     peutGauche = False
                     break
             if peutGauche:
@@ -101,38 +184,49 @@ class newBlock:
                     for i in range(4):
                         (x,y) = self.positions[cle][i] 
                         self.positions[cle][i] = (x-1,y)
+                    cleCorompue =  test_rotation_coromp(self.positions[cle])
+                    if not cle in self.rotationCorompue:
+                        if cleCorompue:
+                            self.rotationCorompue.append(cle)
+                    elif cle in self.rotationCorompue:
+                        if not cleCorompue:
+                            self.rotationCorompue.remove(cle)
                 tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
 
 
-    def rotation(self, forme, tablo):
-        print(self.orient, "||||||")
+    def rotation(self, tablo):
+        '''
+            La fonction rotation est appelée lorqu'on appuie sur la fleche du haut et teste si la rotation du bloc vers la gauche est possible.
+            (ref rotation détail)
+
+            D'abord la fonction trouve les rotations possible en fonction de la forme.
+            Esuite 
+        '''
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
             return       # si c'est un carre pas besoin de tourner
-        elif self.forme == ('elleG' or 'elleD' or 'leThe'):
+        elif self.forme=='elleG' or self.forme=='elleD' or self.forme=='leThe':
             t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
-        orientation = t[t.index(self.orient)-1]
-        peutTourner = True
-        for (x,y) in self.positions[orientation]:
-            if 0<x<11 and y>0 and ((x,y) in self.positions[self.orient] or tablo.tablo[y][x]==0):
-                continue
-            else:
-                peutTourner = False
+        for i in range(len(t)):
+            orientation = t[t.index(self.orient)-(1+i)]
+            if not orientation in self.rotationCorompue:
                 break
+        peutTourner = False
+        if not orientation in self.rotationCorompue:
+            peutTourner = True
+            for (x,y) in self.positions[orientation]:
+                if 0<x<10 and 20>y>0 and ((x,y) in self.positions[orientation] or tablo.tablo[y][x]==0):
+                    continue
+                else:
+                    peutTourner = False
+                    break
         if peutTourner:
             posAvant = self.positions[self.orient].copy()
             self.orient = orientation
             tablo.update(formestr=self.forme, positionsAvant=posAvant, positionsApres=self.positions[self.orient])
-        print(self.orient)
 
-def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
-    for (x,y) in forme:
-        tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
-    return(forme)
-
-    
         
 
 
