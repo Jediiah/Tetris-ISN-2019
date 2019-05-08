@@ -277,7 +277,6 @@ while not done:
                         platoJeu.blit(CONST.lesImages[tabloJeu.tablo[i][j]],(j*30, 600-(i+1)*30))
                         
             
-            
             pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
             clock.tick(5) # limite la vitesse de boucle
 
