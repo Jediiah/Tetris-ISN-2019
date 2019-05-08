@@ -3,11 +3,33 @@ import CONST
 
 
 def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
+    '''
+        La fonction qui initialise la position du bloc dans le tablo 
+        N'est appelé qu'a la création du newBloc
+
+        :param forme: la position initiale du bloc 
+        :param formestr: la forme du bloc (ref commentcamarche)
+        :param tablo: le tablo jeu utilisé
+        :type forme: list
+        :type formestr: str
+        :type tablo: tablo
+    '''
     for (x,y) in forme:
         tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
-    return(forme)
+
 
 def give_couleur(forme):
+    '''
+        Cetete fonction donne un code différents en fonction de la forme du bloc 
+        Un code couleur différent est utilisé pour les bloc tombé et pour le bloc en mouvement (ref commentcamarche)
+        Est utilisée quand le bloc a finit de tomber
+
+        :param forme: la forme du bloc qui est arrivé
+        :type forme: str
+        :return: la couleur du bloc
+        :rtype: str
+
+    '''
     if forme=='carre':
         return('Jaune')
     elif forme=='laBarre':
@@ -23,15 +45,26 @@ def give_couleur(forme):
     elif forme=='elleG':
         return('Rose')
 
+
 def test_rotation_coromp(les_positions):
-        for (x,y) in les_positions:
-            if 0>x or x>9 or y<0 or y>19:
-                return(True)     
+    '''
+        Test de rotation corompue
+        Si un des carrés compposant le bloc est en dehors du tablo alors la rotaion est marquée comme corompue (ref rotation)
+
+        .. warning:: Cette fonction a été développée en urgence car certain carrés avait des position négatives
+                        dans le tablo pour une raison inconue
+    '''
+    for (x,y) in les_positions:
+        if 0>x or x>9 or y<0 or y>19:
+            return(True)     
 
 
 
 
 class tablo:
+    '''
+        
+    '''
 
     def __init__(self):
         self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
@@ -102,7 +135,7 @@ class newBlock:
         # commence en (6,19)
         self.orient = 'DOWN'
         self.forme = laForme
-        self.jsp = give_position(forme[self.orient], self.forme, tablo)
+        give_position(forme[self.orient], self.forme, tablo)
         self.positions = forme
         self.rotationCorompue = []
 
@@ -199,8 +232,12 @@ class newBlock:
             La fonction rotation est appelée lorqu'on appuie sur la fleche du haut et teste si la rotation du bloc vers la gauche est possible.
             (ref rotation détail)
 
-            D'abord la fonction trouve les rotations possible en fonction de la forme.
-            Esuite 
+            D'abord la fonction trouve les rotations possible en fonction de la forme. (la liste t)
+            Esuite, une fois que la prochaine rotation "disponible" est trouvée, la fonction teste s'il n'y a aucun obstacle ou si le bloc ne sort pas du jeu.
+            Si tout est vérifié l'orientation du bloc est changée et les positions sont actualisées dans le tablo
+
+            :param tablo: le tablo utilisé = le jeu
+            :type tablo: tablo
         '''
         # test de possibilité de rotation + update positions
         if self.forme == 'carre':
@@ -209,7 +246,7 @@ class newBlock:
             t = ['DOWN','RIGHT','UP','LEFT']
         else:
             t = ['DOWN', 'UP']
-        for i in range(len(t)):
+        for i in range(len(t)): # Ca a merdé une fois à revoir
             orientation = t[t.index(self.orient)-(1+i)]
             if not orientation in self.rotationCorompue:
                 break
