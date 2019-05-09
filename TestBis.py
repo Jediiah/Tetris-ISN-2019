@@ -264,7 +264,7 @@ while not done:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                     blocTombe.deplacement('BAS',tabloJeu)
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                    blocTombe.rotation(blocTombe.forme,tabloJeu)
+                    blocTombe.rotation(tabloJeu)
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
@@ -283,7 +283,7 @@ while not done:
 
         gameover = 1
         while gameover==1:
-            platoJeu.blit(GameOver, (220,336))
+            screen.blit(GameOver, (220,336))
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.key==(pygame.K_BACKSPACE or pygame.K_ESCAPE):

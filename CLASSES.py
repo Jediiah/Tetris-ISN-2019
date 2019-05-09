@@ -1,6 +1,10 @@
 import pygame
 import CONST
 
+'''
+    Ce module contient les définitions des calsses tablo et newBloc qui permettent de jouer.
+'''
+
 
 def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est le tablo utilisé
     '''
@@ -66,10 +70,21 @@ def test_rotation_coromp(les_positions):
 
 class tablo:
     '''
-        
+        Cette classe est le tableau du jeu. C'est à dire le moyen de gérer les bloc de manière logique.
+
+        Cette classe tablo contient le tableau (oui) ainsi que plusieurs variables nessessaires au fonctionnement du jeu.
     '''
 
     def __init__(self):
+        '''
+            Initialisation de l'objet.
+
+            Création d'une liste de liste (simulation d'un tableau de 10 par 20) (voir exemple)
+            Quelques autres varaiables qui servent à indiquer l'état du jeu:
+                score est le score du joueur (oui oui c'est vrai)
+                isvide indique si il y a un bloc en mouvement dans le tableau (False dans ce cas)
+                gameOver indique quand le joueur a perdu
+        '''
         self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
         self.score = 0
         self.isvide = True
@@ -78,6 +93,11 @@ class tablo:
     
     # Actualise le tablo, les scores/combos
     def test(self):
+        '''
+            Cette fonction teste si il y a des lignes horizontales complètes,
+            Dans ce cas la fonction supprime ces lignes et augmente le score du joueur.
+            Le combo sert a détécter un "Tetris" (4 lignes d'un coup) ce qui augmente le score.
+        '''
         combo = 0
         for i in range(20): 
             if not 0 in self.tablo[i]:
@@ -97,6 +117,16 @@ class tablo:
     
 
     def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
+        '''
+            Cette fonction permet de changer la position du bloc dans le tablo 
+            Elle demande une position avant le déplacement qui sera supprimée ainsi
+            qu'une position après le déplacment (ou rotation) qui sera écrite dans le tablo au bon endroit.
+
+            :param estArrive: par défaut = False. Indique si le bloque à fini de tombé
+            :param formestr: par défaut = "". La forme du bloc qui sera écrite dans le tablo.
+            :param positionAvant: par défaut = []. La position que le bloc occupait avant le déplacement.
+            :param positionApres: par défaut = []. La position que le bloc occupe après le déplacement.
+        '''
         if not estArrive:
             for (xAvant,yAvant) in positionsAvant:
                 self.tablo[yAvant][xAvant] = 0
