@@ -245,7 +245,7 @@ while not done:
         pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
-        while windows==1 and tabloJeu.gameOver==True:
+        while windows==1 and tabloJeu.gameOver==False:
 
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
