@@ -19,10 +19,10 @@ def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est 
         :type tablo: tablo
     '''
     for (x,y) in forme:
-        if tablo.tablo[y][x] == 0:
+        #if tablo.tablo[y][x] == 0:
             tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
-        else:
-            tablo.gameOver = True
+        #else:
+         #   tablo.gameOver = True
 
 
 def give_couleur(forme):
@@ -35,14 +35,13 @@ def give_couleur(forme):
         :type forme: str
         :return: la couleur du bloc
         :rtype: str
-
     '''
     if forme=='carre':
         return('Jaune')
     elif forme=='laBarre':
         return('Bleu')
     elif forme=='leThe':
-        return('Bleu')  #Violet apres
+        return('Violet') 
     elif forme=='eclaireD':
         return('Vert')
     elif forme=='eclaireG':
@@ -122,7 +121,7 @@ class tablo:
             Elle demande une position avant le déplacement qui sera supprimée ainsi
             qu'une position après le déplacment (ou rotation) qui sera écrite dans le tablo au bon endroit.
 
-            :param estArrive: par défaut = False. Indique si le bloque à fini de tombé
+            :param estArrive: par défaut = False. Indique si le bloque à fini de tomber
             :param formestr: par défaut = "". La forme du bloc qui sera écrite dans le tablo.
             :param positionAvant: par défaut = []. La position que le bloc occupait avant le déplacement.
             :param positionApres: par défaut = []. La position que le bloc occupe après le déplacement.
@@ -241,7 +240,7 @@ class newBlock:
         elif direction=='GAUCHE':
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x>0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                if x-1>=0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
                 elif not (x+1,y) in self.positions[self.orient]:
                     peutGauche = False

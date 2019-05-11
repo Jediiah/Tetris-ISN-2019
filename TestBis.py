@@ -1,6 +1,7 @@
 import pygame, pygame.mixer, os.path
 import pygame.locals
 from random import randint
+from copy import deepcopy
 import CLASSES, CONST
 
 # Initialise pygame
@@ -12,19 +13,19 @@ def SelecBloc():
     global tabloJeu
     a = randint(0,6)
     if a==0:
-	    blocTombe = CLASSES.newBlock('carre', CONST.carre, tabloJeu)
+	    blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
     elif a==1:
-	    blocTombe = CLASSES.newBlock('laBarre', CONST.laBarre, tabloJeu)
+	    blocTombe = CLASSES.newBlock('laBarre', deepcopy(CONST.laBarre), tabloJeu)
     elif a==2:
-	    blocTombe = CLASSES.newBlock('leThe', CONST.leThe, tabloJeu)
+	    blocTombe = CLASSES.newBlock('leThe', deepcopy(CONST.leThe), tabloJeu)
     elif a==3:
-	    blocTombe = CLASSES.newBlock('eclaireD', CONST.eclaireD, tabloJeu)
+	    blocTombe = CLASSES.newBlock('eclaireD', deepcopy(CONST.eclaireD), tabloJeu)
     elif a==4:
-	    blocTombe = CLASSES.newBlock('eclaireG', CONST.eclaireG, tabloJeu)
+	    blocTombe = CLASSES.newBlock('eclaireG', deepcopy(CONST.eclaireG), tabloJeu)
     elif a==5:
-	    blocTombe = CLASSES.newBlock('elleD', CONST.elleD, tabloJeu)
+	    blocTombe = CLASSES.newBlock('elleD', deepcopy(CONST.elleD), tabloJeu)
     elif a==6:
-	    blocTombe = CLASSES.newBlock('elleG', CONST.elleG, tabloJeu)
+	    blocTombe = CLASSES.newBlock('elleG', deepcopy(CONST.elleG), tabloJeu)
     return(blocTombe)
 
 
@@ -233,16 +234,20 @@ while not done:
        #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
-        image = pygame.image.load("Images/nvoLeJeu.png")
-        position = (0,0)
-        screen.blit(image, position)
+        imageFond = pygame.image.load("Images/fond_jeu.jpg")
+        imageJeu = pygame.image.load("Images/Damier_20.png")
+        
+        screen.blit(imageFond, (0,0))
 
         # delimitation de la zone de jeu (le cadrillage)
-        platoJeu = screen.subsurface(47,4,347,604)
+        platoJeu = screen.subsurface(50,25,345,609)
+        platoJeu.blit(imageJeu, (0,0))
         
         tabloJeu = CLASSES.tablo()
+
+        graviteForce = 800
         gravite = pygame.USEREVENT + 1
-        pygame.time.set_timer(gravite,1000) # on descend une fois par seconde (peut etre accelerer)
+        pygame.time.set_timer(gravite, graviteForce) # on descend une fois par seconde (peut etre accelerer)
 
        #  Boucle principale du jeu   
         while windows==1 and tabloJeu.gameOver==False:
@@ -250,6 +255,11 @@ while not done:
             if tabloJeu.isvide:
                 blocTombe = SelecBloc()
                 tabloJeu.isvide = False
+
+            print(tabloJeu.score)
+
+            if tabloJeu.score%100==0:
+                graviteForce = graviteForce*0.1
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -270,15 +280,15 @@ while not done:
 
             tabloJeu.test()
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
-            screen.blit(image, position)
+            platoJeu.blit(imageJeu, (0,0))
             for i in range(20):
                 for j in range(10):
                     if tabloJeu.tablo[i][j] != 0:
-                        platoJeu.blit(CONST.lesImages[tabloJeu.tablo[i][j]],(j*30, 600-(i+1)*30))
+                        platoJeu.blit(CONST.lesImages[tabloJeu.tablo[i][j]], (3+(j*29), 609-(((i+2)*29)-3)))
                         
             
             pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
-            clock.tick(5) # limite la vitesse de boucle
+            clock.tick(15) # limite la vitesse de boucle
 
 
         gameover = 1
