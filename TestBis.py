@@ -278,7 +278,7 @@ while not done:
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
-            tabloJeu.test()
+
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             platoJeu.blit(imageJeu, (0,0))
             for i in range(20):

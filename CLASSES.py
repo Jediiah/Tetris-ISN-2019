@@ -19,10 +19,10 @@ def give_position(forme, formestr, tablo):  # forme vient de CONST et tablo est 
         :type tablo: tablo
     '''
     for (x,y) in forme:
-        #if tablo.tablo[y][x] == 0:
+        if tablo.tablo[y][x] == 0:
             tablo.tablo[y][x] = formestr # la forme donne la couleur grace au dictionnaire dans CONST
-        #else:
-         #   tablo.gameOver = True
+        else:
+            tablo.gameOver = True
 
 
 def give_couleur(forme):
@@ -240,9 +240,9 @@ class newBlock:
         elif direction=='GAUCHE':
             peutGauche = True
             for (x,y) in self.positions[self.orient]:
-                if x-1>=0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
+                if x>0 and ((x-1,y) in self.positions[self.orient] or tablo.tablo[y][x-1]==0):
                     continue
-                elif not (x+1,y) in self.positions[self.orient]:
+                elif not (x-1,y) in self.positions[self.orient]:
                     peutGauche = False
                     break
             if peutGauche:
