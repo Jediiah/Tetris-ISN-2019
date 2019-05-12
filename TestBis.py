@@ -246,7 +246,6 @@ while not done:
 
         # création d'une surface d'affichage des scores
         afficheScore = screen.subsurface(350,250,355,270)
-        afficheScore.fill(CONST.NOIR)
 
         # création de l'affichage de prévisualisation de la pièce
         visuPiece = screen.subsurface(350,50,355,150)
@@ -274,7 +273,7 @@ while not done:
                 prochainBloc = listeBlocs[randint(0,6)]
 
                 visuPiece.fill(CONST.BLANC)
-                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (20,20))
+                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (50,45))
 
             print(tabloJeu.score)
 
@@ -299,9 +298,9 @@ while not done:
                     blocTombe.deplacement('BAS',tabloJeu)
 
             if tabloJeu.score!=tempScore:
-                textScore = policeScore.render(str(tabloJeu.score), False, (255,255,255))
-                afficheScore.fill(CONST.NOIR)
-                afficheScore.blit(textScore, (5,60))
+                textScore = policeScore.render(str(tabloJeu.score), False, (0,0,0))
+                screen.blit(imageFond, (0,0))
+                afficheScore.blit(textScore, (5,40))
                 tempScore = tabloJeu.score
 
 
