@@ -57,3 +57,13 @@ lesImages = {
     'elleD' : pygame.image.load("Images/BlocRouge.png"),
     'Rouge' : pygame.image.load("Images/BlocRouge.png")
 }
+
+ImagesPrevisualisation = {
+    'carre' : pygame.image.load("Images/carre.png"),
+    'laBarre': pygame.image.load("Images/laBarre.png"),
+    'leThe' : pygame.image.load("Images/leThe.png"),
+    'eclaireD': pygame.image.load("Images/eclaireD.png"),
+    'eclaireG': pygame.image.load("Images/eclaireG.png"),
+    'elleG':  pygame.image.load("Images/elleG.png"),
+    'elleD': pygame.image.load("Images/elleD.png")
+}

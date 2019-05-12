@@ -1,5 +1,6 @@
 import pygame, pygame.mixer, os.path
 import pygame.locals
+import pygame.freetype
 from random import randint
 from copy import deepcopy
 import CLASSES, CONST
@@ -9,22 +10,22 @@ pygame.init()
 
 
 # selection aleatoire de bloc
-def SelecBloc():
+def SelecBloc(bloc):
     global tabloJeu
     a = randint(0,6)
-    if a==0:
+    if bloc=='carre':
 	    blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
-    elif a==1:
+    elif bloc=='laBarre':
 	    blocTombe = CLASSES.newBlock('laBarre', deepcopy(CONST.laBarre), tabloJeu)
-    elif a==2:
+    elif bloc=='leThe':
 	    blocTombe = CLASSES.newBlock('leThe', deepcopy(CONST.leThe), tabloJeu)
-    elif a==3:
+    elif bloc=='eclaireD':
 	    blocTombe = CLASSES.newBlock('eclaireD', deepcopy(CONST.eclaireD), tabloJeu)
-    elif a==4:
+    elif bloc=='eclaireG':
 	    blocTombe = CLASSES.newBlock('eclaireG', deepcopy(CONST.eclaireG), tabloJeu)
-    elif a==5:
+    elif bloc=='elleD':
 	    blocTombe = CLASSES.newBlock('elleD', deepcopy(CONST.elleD), tabloJeu)
-    elif a==6:
+    elif bloc=='elleG':
 	    blocTombe = CLASSES.newBlock('elleG', deepcopy(CONST.elleG), tabloJeu)
     return(blocTombe)
 
@@ -238,23 +239,42 @@ while not done:
         imageJeu = pygame.image.load("Images/Damier_20.png")
         
         screen.blit(imageFond, (0,0))
-
+        
         # delimitation de la zone de jeu (le cadrillage)
         platoJeu = screen.subsurface(50,25,345,609)
         platoJeu.blit(imageJeu, (0,0))
-        
+
+        # création d'une surface d'affichage des scores
+        afficheScore = screen.subsurface(350,250,355,270)
+        afficheScore.fill(CONST.NOIR)
+
+        # création de l'affichage de prévisualisation de la pièce
+        visuPiece = screen.subsurface(350,50,355,150)
+        visuPiece.fill(CONST.BLANC)
+
+
         tabloJeu = CLASSES.tablo()
+        tempScore = 1
+
+        policeScore = pygame.font.Font(None, 96)        
 
         graviteForce = 800
         gravite = pygame.USEREVENT + 1
         pygame.time.set_timer(gravite, graviteForce) # on descend une fois par seconde (peut etre accelerer)
 
+        listeBlocs = ['carre','laBarre','leThe','eclaireD','eclaireG','elleG','elleD']
+        prochainBloc = listeBlocs[randint(0,6)]
+
        #  Boucle principale du jeu   
         while windows==1 and tabloJeu.gameOver==False:
 
             if tabloJeu.isvide:
-                blocTombe = SelecBloc()
+                blocTombe = SelecBloc(prochainBloc)
                 tabloJeu.isvide = False
+                prochainBloc = listeBlocs[randint(0,6)]
+
+                visuPiece.fill(CONST.BLANC)
+                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (20,20))
 
             print(tabloJeu.score)
 
@@ -277,6 +297,12 @@ while not done:
                     blocTombe.rotation(tabloJeu)
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
+
+            if tabloJeu.score!=tempScore:
+                textScore = policeScore.render(str(tabloJeu.score), False, (255,255,255))
+                afficheScore.fill(CONST.NOIR)
+                afficheScore.blit(textScore, (5,60))
+                tempScore = tabloJeu.score
 
 
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
