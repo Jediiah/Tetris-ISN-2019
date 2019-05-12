@@ -252,34 +252,34 @@ while not done:
         visuPiece.fill(CONST.BLANC)
 
 
-        tabloJeu = CLASSES.tablo()
+        tabloJeu = CLASSES.tablo() # Création du tableau de jeu
         tempScore = 1
 
-        policeScore = pygame.font.Font(None, 96)        
+        policeScore = pygame.font.Font(None, 96) # la police utilisée pour afficher le score   
 
-        graviteForce = 800
+        graviteForce = 500
         gravite = pygame.USEREVENT + 1
-        pygame.time.set_timer(gravite, graviteForce) # on descend une fois par seconde (peut etre accelerer)
+        pygame.time.set_timer(gravite, graviteForce) # on descend 2 fois par seconde
 
+        # pour séléctionner aléatoirement la prochaine pièce
         listeBlocs = ['carre','laBarre','leThe','eclaireD','eclaireG','elleG','elleD']
-        prochainBloc = listeBlocs[randint(0,6)]
+        prochainBloc = listeBlocs[randint(0,6)] 
 
        #  Boucle principale du jeu   
         while windows==1 and tabloJeu.gameOver==False:
 
+            # s'il n y a pas de piece en mouvement dans le jeu
             if tabloJeu.isvide:
-                blocTombe = SelecBloc(prochainBloc)
+                blocTombe = SelecBloc(prochainBloc) # création de la piece
                 tabloJeu.isvide = False
-                prochainBloc = listeBlocs[randint(0,6)]
+                prochainBloc = listeBlocs[randint(0,6)] # séléction de la prochaine pièce
 
+                # affichage de la prochaine pièce
                 visuPiece.fill(CONST.BLANC)
                 visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (50,45))
 
-            print(tabloJeu.score)
 
-            if tabloJeu.score%100==0:
-                graviteForce = graviteForce*0.1
-
+            # permet de détecter les inputs
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
@@ -297,6 +297,7 @@ while not done:
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
+            # si le score du joueur change on actualise l'affichage de celui-ci
             if tabloJeu.score!=tempScore:
                 textScore = policeScore.render(str(tabloJeu.score), False, (0,0,0))
                 screen.blit(imageFond, (0,0))
