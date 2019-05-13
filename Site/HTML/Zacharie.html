@@ -96,6 +96,27 @@ La première classe est la classe <span class="code">tablo</span> qui contient l
     </li>
 </ul>
 <br>
+<br>
+La seconde classe est la classe <span class="code">newBlock</span> qui désigne la pièce en mouvement dans le tablo.
+Contrairement à <span class="code">tablo</span> celle-ci a besoin d'arguments qui servent à l'initialisation de la pièce.
+<br>
+<code>def __init__(self, laForme, positions_init, tablo):<br>
+            ...self.orient = 'DOWN'<br>
+            ...self.forme = laForme<br>
+            ...give_position(positions_init[self.orient], self.forme, tablo)<br>
+            ...self.positions = positions_init<br>
+            ...self.rotationCorompue = []<br>
+</code>
+<ul>
+    <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html/orientation">l'orientation</a> de la pièce sur 'DOWN'.</li>
+    <li><span class="code">laForme</span> la forme de la pièce créée (<a href="Brice§.html/couleur">+</a>) enregistrée dans l'objet comme <span class="code">forme</span></li>
+    <li><span class="code">positions_init</span> est la <a href="Brice.html/positions">position</a> initiale de la pièce stockée dans <span class="code">CONST</span>
+        Grâce à ce dictionaire de positions on initialise la position de la pièce dans le tablo : <span class="code">give_position()</span> (plus de détails <a href="plusloin">ici</a>)</li>
+    <li><span class="code">tablo</span> est l'objet de la classe <span class="code">tablo</span> dans lequel se trouve la pièce crée.</li>
+    <li><span class="code">rotationCorompue</span> est une liste des rotations qu'on ne peut plus utiliser.
+        Parfois certaines rotations ont des carrés dont la position a une valeur négative ce qui les place n'importe où. Cette liste associée à la fonction <code>test_rotation_coromp()</code>
+        qui a été développée en urgence pour éviter de telles horreurs (on verra comment après) mais devrait rester vide.</li>
+</ul>
 <br></div>
 
 
