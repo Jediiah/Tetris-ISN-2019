@@ -9,10 +9,9 @@ import CLASSES, CONST
 pygame.init()
 
 
-# selection aleatoire de bloc
+# création du bloc
 def SelecBloc(bloc):
     global tabloJeu
-    a = randint(0,6)
     if bloc=='carre':
 	    blocTombe = CLASSES.newBlock('carre', deepcopy(CONST.carre), tabloJeu)
     elif bloc=='laBarre':
@@ -251,15 +250,15 @@ while not done:
         visuPiece = screen.subsurface(350,50,355,150)
         visuPiece.fill(CONST.BLANC)
 
-
-        tabloJeu = CLASSES.tablo() # Création du tableau de jeu
+        # Création du tableau de jeu
+        tabloJeu = CLASSES.tablo() 
         tempScore = 1
 
         policeScore = pygame.font.Font(None, 96) # la police utilisée pour afficher le score   
 
         graviteForce = 500
-        gravite = pygame.USEREVENT + 1
-        pygame.time.set_timer(gravite, graviteForce) # on descend 2 fois par seconde
+        gravite = pygame.USEREVENT + 1 # création d'un nouvel événement
+        pygame.time.set_timer(gravite, graviteForce) # Cet événement est produit toutes les 500ms (descente automatique)
 
         # pour séléctionner aléatoirement la prochaine pièce
         listeBlocs = ['carre','laBarre','leThe','eclaireD','eclaireG','elleG','elleD']

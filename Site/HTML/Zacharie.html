@@ -44,90 +44,61 @@
     <!--  CONTENT  --> 
     <article id="content">
     
-        <div style="width=800px;"><span class="date">June 9th 2017</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">New Album</span><br><br>Dear friends,<br>
+        <div style="float:left; width:700px; margin-right:16px; margin-bottom:16px;"><span class="title">Mon super dossier</span><br><br><br>
 <br>
-Our Oceans was originally a side project with Exivious being my full time band. We've already announced the news through our Exivious channels, but not through the Our Oceans channels so here goes...<br>
+Vous voici sur la page où j'explique l'inextricable charabias que j'ai écris. Comme dis <a href="on verra" >plus tôt</a> le fonctionnement général du jeu à été travaillé par Brice et moi. 
+Ce qui s'est traduit par le module <span class="nomDeFichier">CLASSES</span>, que j'ai cependant entièrement écrit ainsi que la partie délimité par TETRIS dans <span class="nomDeFichier">TestBis</span>.
 <br>
-We recently decided to call it quits with Exivious and turn Our Oceans into our main band. As I stated before, taking on the vocal duties in Our Oceans changed everything for me; the way I see myself and what I aspire to become as a musician has completely shifted. Fortunately, my band mates are all with me in this decision and as such, Our Oceans is now a real band.<br>
+Avant de commencer je vous rappelle qu'il est conseillé de lire le dossier de <a href="Brice.html" >Brice</a> avant celui-ci.
 <br>
-At the moment, we're in the middle of writing and recording a new album. And I have to say that I haven't been this excited about making music in a long, long time! I feel like I finally arrived at a point in my life where I've found a style of music that I can completely identify with. It will be a while to complete these songs and get them released, but if you like what we did with the Our Oceans debut and our 2 Exivious albums, I promise it will be worth the wait.<br>
 <br>
-Thank you for your patience and your support!<br>
+J'expliquerais d'abord <span class="nomDeFichier">CLASSES</span> pour permettre de mieux comprendre la suite qui sera sur la boucle du jeu dans <span class="nomDeFichier">TestBis</span>.
+Il est conseillé de lire le dossier de <a href="Brice.html" >Brice</a> avant celui-ci.
 <br>
-Tymon<br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">November 22nd 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Tangled - Official Music Video</span><br><br>We proudly present you our first music video for our song Tangled!<br>
+Le module <span class="nomDeFichier">CLASSES</span> contient les définitions des deux classes utilisées (de nouveaux objets).
 <br>
-Check out what our friends from <a target="_blank" href="http://teamrock.com/feature/2016-11-17/our-oceans-release-first-ever-video">Prog</a>, <a target="_blank" href="http://echoesanddust.com/2016/11/video-premiere-our-oceans-tangled/">Echoes And Dust</a> and <a target="_blank" href="http://www.heavyblogisheavy.com/2016/11/18/premiere-our-oceans-release-music-video-for-tangled/">Heavy Blog Is Heavy</a> have to say about it.<br>
 <br>
-<a target="_blank" href="http://www.youtube.com/watch?v=iFmujUPYZcQ"><br>
-    <img src="img/news/tangled_music_video.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">June 8th 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Tymon Performing Let Me</span><br><br>Here's Tymon with a solo performance of our song <b>Let Me</b>.<br>
+La première classe est la classe <span class="code">tablo</span> qui contient le <a href="Brice.html/untruc">tableau</a>, le score et l'état du jeu
+(: isVide indique s'il y a une pièce en mouvement dans le jeu et gamOver si le joueur a perdu). Cette classe contient aussi deux fonctions:
+<ul>
+    <li>
+        Premièrement la fonction <span class="code">test()</span> qui permet de détecter des lignes hoizontales complètes et de les supprimer.
+        <br>
+        Dans cette fonction une prmière boucle regarde les lignes du tableau une par une et si une ligne complète est détectée, la supprime et fait "descendre" celles au dessus.
+        Une fois que toutes les lignes sont descendues (=quand une ligne vide est detectée ou quand on arrive en haut) la boucle recommence à la même ligne (le <span class="code">i -= 1</span>
+        ce qui permet de fonctionner lorsequ'il y a deux lignes pleines à la suite (c'est mieux quand même).
+        <br>
+        Finalement la variable <span class="code">combo</span> permet de détecter un "TETRIS" (4 lignes d'un coup) qui rapporte 800 points contre 100 pour une seule ligne.
+    </li>
+    <br>
+    <li>
+    Ensuite la fonction <span class="code">update()</span> qui actualise la position du bloc en mouvement.
+    <br>
+    Pour plus de clarté je vais éxpliquer chaque argument de cette fonction.
+    <br>
+    <span class="code">def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]):</span>
+    <br>
+    <br>
+    <ul>
+        <li><span class="code">esrArrive</span> est un booléen, faux par défaut, qui indique lorsque la pièce en mouvement est arrivée et ne pourra plus bouger.</li>
+        <li><span class="code">positionsAvant</span> et <span class="code">positionsApres</span> sont les <a href="Brice.html/positions">position</a> (listes de tuples)
+        de la pièce avant et après le déplacment ou la rotation de celle-ci.</li>
+        <li><span class="code">formestr</span> est la forme de la pièce pour insérer la bonne dans le <a href="Brice.html/couleur">tablo</a>.</li>
+    </ul>
+    <br>
+    Voyons maintenant le fonctionement de la fonction X).
+    <ul>
+        <li>Si la pièce est encore en trian de tomber (estArrive = False, valeur par défaut), les blocs constituanr la pièce avant le déplancement sont supprimés du tablo
+            (les cases correspondantes sont vidées). Ensuite les blocs constituant la pièce après le déplancement sonr "insérées" dans le tablo (la valeur de <span class="code">formestr</span> est donnée aux la case correspondantes).</li>
+        <li>Si la pièce a finit de tomber, les positions sont actualisées de la même manière et l'état du tablo passe aà vide (<span class="code">tablo.isvide = True</span>) 
+            , ce qui permet d'indiquer qu'il faut créer une nouvelle pièce.</li>
+    </ul>
+    </li>
+</ul>
 <br>
-Check it out and if you like what you hear, please share! Thank you.<br>
-<br>
-<a target="_blank" href="http://www.youtube.com/watch?v=UDVTtZqAGvc"><br>
-    <img src="img/news/pt_tymon_letme.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">March 9th 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">New Shirts</span><br><br>We have 2 new colors in store for our cover artwork shirt: <b>maroon</b> and <b>cardinal red</b>.<br>
-<br>
-For everyone who tried to order a <b>turquoise</b> or <b>charcoal</b> shirt but found they were out of stock: They're back in store as well!<br>
-<br>
-<a target="_blank" href="http://www.ouroceans.net/store"><br>
-<img src="img/news/shirts.jpg" width="800" height="285" border="0"><br>
-</a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">March 6th 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Bass Play-through Reawaken</span><br><br>Here's Robin laying down some purry fretless bass lines for our song <b>Reawaken</b>.<br>
-<br>
-<a target="_blank" href="http://www.youtube.com/watch?v=uWFBF0FENWI"><br>
-    <img src="img/news/pt_robin_reawaken.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">February 22nd 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Making-Of: Drums</span><br><br>Here's the first episode of a 'making-of' series, this one focuses on the drums. Enjoy the studio footage and (very awkward) commentary by Jasper and Tymon.<br>
-<br>
-<a target="_blank" href="http://www.youtube.com/watch?v=6dPE-OgzVu8"><br>
-    <img src="img/news/making-of_drums.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">January 4th 2016</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Play-throughs</span><br><br>Check out these play-throughs that Tymon and Jasper recorded!<br>
-<br>
-    <a style="float:left; margin-right:16px;" target="_blank" href="http://www.youtube.com/watch?v=EAOpWj42w4o"><br>
-    <img src="img/news/pt_tymon_tangled.jpg" width="268" height="150" border="0"><br>
-    </a><a style="float:left;" target="_blank" href="http://www.youtube.com/watch?v=E7BhCnW_1vQ"><br>
-    <img src="img/news/pt_jasper_what_if.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">November 15th 2015</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Full Album Stream!</span><br><br>We know it took a little longer than expected, but here it finally is: <strong>Our Oceans' debut album</strong>.<br>
-<br>
-You can <strong>stream the entire album</strong> at:<br>
-<a target="_blank" href="http://ouroceansband.bandcamp.com">ouroceansband.bandcamp.com</a><br>
-<br>
-You can get our music at the following places:<br>
-- Physical CDs: <a target="_blank" href="http://www.ouroceans.net/store">www.ouroceans.net/store</a><br>
-- Bandcamp: <a target="_blank" href="http://ouroceansband.bandcamp.com">ouroceansband.bandcamp.com</a><br>
-- All major online music stores like <strong>iTunes</strong> and <strong>Spotify</strong><br></div><div style="float:right; width:200px; margin-bottom:16px;"><div class="albumpic">
-    		  <img src="img/news/album_oo.jpg" width="200" height="200" border="0">
-    		  </div></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">November 3rd 2015</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">'Let Me' Song Premiere</span><br><br>Ready for another song? This is the rocker of the album, titled: <strong>'Let Me'</strong>.<br>
-<br>
-If you like what you hear, then <strong>please share</strong> this song on your facebook timeline! It helps us much more than you might think, thanks!<br>
-<br>
-<a target="_blank" href="http://www.youtube.com/watch?v=Qv9r5aALBSE"><br>
-<img src="img/news/let_me_lyric2.jpg" width="268" height="150" border="0"><br>
-</a><br></div><div style="float:right; width:200px; margin-bottom:16px;"><div class="albumpic">
-    		  <img src="img/news/let_me_lyric.jpg" width="200" height="200" border="0">
-    		  </div></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">October 23rd 2015</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">'What If' Song Premiere</span><br><br>Here is the first track of the album, titled: <strong>'What If'</strong>. We hope you'll enjoy!<br>
-<br>
-If you like what you hear, then <strong>PLEASE</strong> share this video on your facebook timeline. We are an <strong>independent</strong>, small band without a label behind us for promotion. So we rely on <strong>your help</strong> to spread the word. Thanks!<br>
-<br>
-    <a target="_blank" href="http://www.youtube.com/watch?v=VxMaTuErrSk"><br>
-    <img src="img/news/what_if_lyric2.jpg" width="268" height="150" border="0"><br>
-    </a><br></div><div style="float:right; width:200px; margin-bottom:16px;"><div class="albumpic">
-    		  <img src="img/news/what_if_lyric.jpg" width="200" height="200" border="0">
-    		  </div></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">October 20th 2015</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Cover Artwork</span><br><br>We'd like to reveal the <strong>cover artwork</strong> as well as the <strong>track listing</strong> today. Hope you like it!<br>
-<br>
-1 <strong>What If</strong><br>
-2 <strong>Tangled</strong><br>
-3 <strong>Precarious</strong><br>
-4 <strong>Lioness' Sunrise</strong><br>
-5 <strong>Am I Still Here?</strong><br>
-6 <strong>Illuminate</strong><br>
-7 <strong>Turquoise</strong><br>
-8 <strong>Let Me</strong><br>
-9 <strong>Reawaken</strong><br></div><div style="float:right; width:200px; margin-bottom:16px;"><div class="albumpic">
-    		  <img src="img/news/album_oo.jpg" width="200" height="200" border="0">
-    		  </div></div><div style="clear: both;"></div><br><br><hr><br><div style="width=800px;"><span class="date">October 19th 2015</span></div><div style="float:left; width:584px; margin-right:16px; margin-bottom:16px;"><span class="title">Crowd-funding Campaign Ends</span><br><br>We'd like to thank everyone who contributed to our first <strong>successful crowd-funding campaign</strong>.<br>
-<br>
-With the end of the campaign comes the launch of a <strong>new website</strong>. Please notice that you can still <strong>pre-order</strong> our album and shirts in the new <a target="_blank" href="http://www.ouroceans.net/store">web store</a>.<br></div><div style="float:right; width:200px; margin-bottom:16px;"></div><div style="clear: both;"></div> 
-                  
+<br></div>
+
+
     </article>
     
     

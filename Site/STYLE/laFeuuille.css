@@ -152,6 +152,11 @@ img {
 	padding: 5px;
 }
 
+.code {
+	font-weight: 600;
+	font-family: 'FreeMono, monospace'
+}
+
 
 .side_item {
 	background:#ffffff;

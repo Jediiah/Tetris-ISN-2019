@@ -149,7 +149,7 @@ class newBlock:
         ainsi que les fonctions qui permettent de le déplacer et de le faire tourner
     '''
 
-    def __init__(self, laForme, forme, tablo):
+    def __init__(self, laForme, positions_init, tablo):
         '''
             Initialisation du nouveau bloc
 
@@ -165,12 +165,10 @@ class newBlock:
             :type forme: dict
             :type tablo: tablo
         '''
-        #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
-        # commence en (6,19)
         self.orient = 'DOWN'
         self.forme = laForme
-        give_position(forme[self.orient], self.forme, tablo)
-        self.positions = forme
+        give_position(positions_init[self.orient], self.forme, tablo)
+        self.positions = positions_init
         self.rotationCorompue = []
 
         
