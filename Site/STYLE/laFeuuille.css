@@ -1,4 +1,3 @@
-/*  General HTML styling  */
 
 html {
 	margin: 0;
@@ -32,17 +31,6 @@ a:active {color: #3aa299; font-weight: bold; text-decoration: none;}
 a:hover {color: #37bbb0; font-weight: bold; text-decoration: none;}
 
 
-hr {
-	color:#d6d6d6;
-	background-color:#d6d6d6;
-	height:1px;
-	border:none;
-}
-
-
-img {
-	border:none;
-}
 
 pre {
 	background-color: snow;
@@ -52,7 +40,6 @@ pre {
 	padding: 5px;
 }
 
-/*  Layout  */
 
 #header {
 	text-align: center;
@@ -82,50 +69,8 @@ pre {
 }
 
 #menu a:link    {color:#247069; font-weight:bold; text-decoration:none;}
-#menu a:visited {color:#247069; font-weight:bold; text-decoration:none;}
 #menu a:active  {color:#247069; font-weight:bold; text-decoration:none;}
 #menu a:hover   {color:#37bbb0; font-weight:bold; text-decoration:none;}
-
-
-#menu_fb {
-	width: 41px;
-	height: 41px;
-	margin:-10px;
-	background-image: url('img/menu_fb.jpg');
-}
-#menu_fb:hover {
-	background-image: url('img/menu_fb_h.jpg');
-}
-
-#menu_yt {
-	width: 41px;
-	height: 41px;
-	margin:-10px;
-	background-image: url('img/menu_yt.jpg');
-}
-#menu_yt:hover {
-	background-image: url('img/menu_yt_h.jpg');
-}
-
-#menu_ig {
-	width: 41px;
-	height: 41px;
-	margin:-10px;
-	background-image: url('img/menu_ig.jpg');
-}
-#menu_ig:hover {
-	background-image: url('img/menu_ig_h.jpg');
-}
-
-#menu_tw {
-	width: 41px;
-	height: 41px;
-	margin:-10px;
-	background-image: url('img/menu_tw.jpg');
-}
-#menu_tw:hover {
-	background-image: url('img/menu_tw_h.jpg');
-}
 
 
 #content {
@@ -153,7 +98,7 @@ pre {
 	width:350px;
 }
 
-#toc {
+#Sommaire {
 	background-color: #ffffff;
 	border-radius: 5px;
 	padding: 5px;
@@ -164,52 +109,6 @@ pre {
 	font-family: 'FreeMono, monospace'
 }
 
-
-.side_item {
-	background:#ffffff;
-	
-	text-align: center;
-	
-	padding:16px;
-	border-radius: 5px;
-	
-	-moz-box-shadow:    0px 2px 16px 1px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.15);
-    box-shadow:         0px 2px 16px 1px rgba(0, 0, 0, 0.15);
-	
-	margin-left:0px;
-	margin-top:0px;
-	margin-right:0px;
-	margin-bottom:16px;
-	
-}
-
-
-.albumpic {
-    height:200px;
-	width:200px;
-        
-	border:1;
-	border-color:#247069;
-	border-style:solid;
-	border-width:1px;
-	
-}
-
-
-/*  Additional text styling  */
-
-.date {
-	font-size:8pt;
-	font-weight:700;
-}
-
-.datew {
-	font-size:8pt;
-	font-weight:700;
-	color:#ffffff;
-}
-
 .title {
 	font-family:"OOfont";
 	font-size:35pt;
@@ -217,76 +116,4 @@ pre {
 	color:#37bbb0;
 }
 
-.titlew {
-	font-family:"OOfont";
-	font-size:35pt;
-	font-weight:200;
-	color:#ffffff;
-}
-
-.approve {
-	color:#090;
-	font-weight:bold;
-}
-
-.error {
-	color:#F00;
-	font-weight:bold;	
-}
-
-.ht {
-	font-size:24pt;
-	font-weight:200;	
-}
-
-
-/*  General form styling  */
-
-input[type=text], input[type=password]  {
-	width:400px;
-	
-	padding:2px;
-	margin:0px 0px 16px 0px;
-	
-	border:solid 1px #d6d6d6;
-	font-size:10pt;
-	font-family: 'Open Sans', sans-serif;
-}
-
-
-input[type=submit], input[type=button] {
-	font-family: 'Open Sans', sans-serif;
-	color:#ffffff;
-	font-size:11pt;
-	border:none;
-	background-color:#247069;
-	
-	margin-left:0px;
-	
-	padding-left:8px;
-	padding-top:4px;
-	padding-right:8px;
-	padding-bottom:6px;
-	
-	cursor:pointer;
-}
-
-
-input[type=submit]:hover {
-	background-color:#37bbb0;
-}
-
-textarea {
-	width:729px;
-	height:150px;
-	
-	padding:2px;
-	margin:0px 0px 16px 0px;
-	
-	border:solid 1px #d6d6d6;
-	
-	font-family: 'Open Sans', sans-serif;
-	font-size:10pt;
-	resize:none;
-}
 
