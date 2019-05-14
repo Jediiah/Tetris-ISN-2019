@@ -44,157 +44,158 @@
     <!--  CONTENT  --> 
     <article id="content">
     
-        <div style="float:left; width:700px; margin-right:16px; margin-bottom:16px;"><span class="title">Mon super dossier</span><br><br><br>
+        <div style="float:left; width:700px; margin-right:16px; margin-bottom:16px;"><span class="title">Le super dossier de Zacharie</span><br><br><br>
 <br>
-Vous voici sur la page où j'explique l'inextricable charabias que j'ai écris. Comme dis <a href="on verra" >plus tôt</a> le fonctionnement général du jeu à été travaillé par Brice et moi. 
-Ce qui s'est traduit par le module <span class="nomDeFichier">CLASSES</span>, que j'ai cependant entièrement écrit ainsi que la partie délimité par TETRIS dans <span class="nomDeFichier">TestBis</span>.
+Vous voici sur la page où j'explique l'inextricable charabias que j'ai codé. Comme dis <a href="TetrisSite.html#content" >plus tôt</a> le fonctionnement général du jeu à été travaillé par Brice et moi. 
+Ce qui s'est traduit par le module <span class="nomDeFichier">CLASSES</span>, que j'ai cependant entièrement écrit ainsi que la partie délimité par ==TETRIS== dans <span class="nomDeFichier">TestBis</span>.
 <br>
 Avant de commencer je vous rappelle qu'il est conseillé de lire le dossier de <a href="Brice.html" >Brice</a> avant celui-ci.
 <br>
 <br>
-J'expliquerais d'abord <span class="nomDeFichier">CLASSES</span> pour permettre de mieux comprendre la suite qui sera sur la boucle du jeu dans <span class="nomDeFichier">TestBis</span>.
-Il est conseillé de lire le dossier de <a href="Brice.html" >Brice</a> avant celui-ci.
 <br>
-Le module <span class="nomDeFichier">CLASSES</span> contient les définitions des deux classes utilisées (de nouveaux objets).
+&nbsp; J'expliquerais <span class="nomDeFichier">CLASSES</span> pour permettre de mieux comprendre la boucle du jeu dans <span id="classe_tablo" class="nomDeFichier">TestBis</span>.
+<br>
+
 <br>
 <br>
-La première classe est la classe <span class="code">tablo</span> qui contient le <a href="Brice.html/untruc">tableau</a>, le score et l'état du jeu
-(: isVide indique s'il y a une pièce en mouvement dans le jeu et gamOver si le joueur a perdu). Cette classe contient aussi deux fonctions:
+<br>Le module <span class="nomDeFichier">CLASSES</span> contient les définitions des deux classes utilisées (de nouveaux objets).
+<br>
+&nbsp; &nbsp; &nbsp; La première classe est la classe <span class="code">tablo</span> qui contient le <a href="Brice.html#tableau">tableau</a>, le score et l'état du jeu  &nbsp;
+(: <spoan class="code">isVide</spoan> indique s'il y a une pièce en mouvement dans le jeu et <span class="code">gameOver</span> si le joueur a perdu). Cette classe contient aussi deux fonctions:
 <ul>
     <li>
-        Premièrement la fonction <span class="code">test()</span> qui permet de détecter des lignes hoizontales complètes et de les supprimer.
+        Premièrement la fonction <span id="fctn_tablo_test" class="code">test()</span> permet de détecter des lignes hoizontales complètes et de les supprimer.
         <br>
-        Dans cette fonction une prmière boucle regarde les lignes du tableau une par une et si une ligne complète est détectée, la supprime et fait "descendre" celles au dessus.
-        Une fois que toutes les lignes sont descendues (=quand une ligne vide est detectée ou quand on arrive en haut) la boucle recommence à la même ligne (le <span class="code">i -= 1</span>
-        ce qui permet de fonctionner lorsequ'il y a deux lignes pleines à la suite (c'est mieux quand même).
+        Dans cette fonction une première boucle regarde les lignes du tableau une par une et si une ligne complète est détectée, la supprime et fait "descendre" celles au dessus.
+        Une fois que toutes les lignes sont descendues (=quand une ligne vide est detectée ou quand on arrive en haut) la boucle recommence à la même ligne (le <span class="code">i -= 1</span>)
+        ce qui permet de fonctionner lorsqu'il y a deux lignes pleines à la suite (c'est mieux quand même).
         <br>
         Finalement la variable <span class="code">combo</span> permet de détecter un "TETRIS" (4 lignes d'un coup) qui rapporte 800 points contre 100 pour une seule ligne.
     </li>
     <br>
     <li>
-    Ensuite la fonction <span class="code">update()</span> qui actualise la position du bloc en mouvement.
+    Ensuite la fonction <span id="fctn_tablo_update" class="code">update()</span> qui actualise la position du bloc en mouvement.
     <br>
     Pour plus de clarté je vais éxpliquer chaque argument de cette fonction.
     <br>
-    <span class="code">def update(self, estArrive=False, formestr="",positionsAvant=[], positionsApres=[]):</span>
+    <br>
+    <code><pre>def update(self, estArrive=False, formestr="",positionsAvant=[]
+         , positionsApres=[]):</pre> </code>
     <br>
     <br>
     <ul>
         <li><span class="code">esrArrive</span> est un booléen, faux par défaut, qui indique lorsque la pièce en mouvement est arrivée et ne pourra plus bouger.</li>
-        <li><span class="code">positionsAvant</span> et <span class="code">positionsApres</span> sont les <a href="Brice.html/positions">position</a> (listes de tuples)
-        de la pièce avant et après le déplacment ou la rotation de celle-ci.</li>
-        <li><span class="code">formestr</span> est la forme de la pièce pour insérer la bonne dans le <a href="Brice.html/couleur">tablo</a>.</li>
+        <li><span class="code">positionsAvant</span> et <span class="code">positionsApres</span> sont les <a href="Brice.html#positions">positions</a> (listes de tuples)
+        de la pièce avant et après le déplacement ou la rotation de celle-ci.</li>
+        <li><span class="code">formestr</span> est la forme de la pièce pour insérer la bonne dans le <a href="Brice.html#couleur">tableau</a>.</li>
     </ul>
     <br>
     Voyons maintenant le fonctionement de la fonction X).
     <ul>
-        <li>Si la pièce est encore en trian de tomber (estArrive = False, valeur par défaut), les blocs constituanr la pièce avant le déplancement sont supprimés du tablo
-            (les cases correspondantes sont vidées). Ensuite les blocs constituant la pièce après le déplancement sonr "insérées" dans le tablo (la valeur de <span class="code">formestr</span> est donnée aux la case correspondantes).</li>
-        <li>Si la pièce a finit de tomber, les positions sont actualisées de la même manière et l'état du tablo passe aà vide (<span class="code">tablo.isvide = True</span>) 
+        <li>Si la pièce est encore en trian de tomber (estArrive = False, valeur par défaut), les blocs constituant la pièce avant le déplacement sont supprimés du tablo
+            (les cases correspondantes sont vidées). Ensuite les blocs constituant la pièce après le déplacement sonr "insérées" dans le tablo (la valeur de <span class="code">formestr</span> est donnée aux la case correspondantes).</li>
+        <li>Si la pièce a fini de tomber, les positions sont actualisées de la même manière et l'état du tablo passe à vide (<span class="code">tablo.isvide = True</span>) 
             , ce qui permet d'indiquer qu'il faut créer une nouvelle pièce.</li>
     </ul>
     </li>
 </ul>
 <br>
 <br>
-La seconde classe est la classe <span class="code">newBlock</span> qui désigne la pièce en mouvement dans le tablo.
-Contrairement à <span class="code">tablo</span> celle-ci a besoin d'arguments qui servent à l'initialisation de la pièce.
 <br>
 <br>
-<code><pre>def __init__(self, laForme, positions_init, tablo):
-            self.orient = 'DOWN'
-            self.forme = laForme
-            give_position(positions_init[self.orient], self.forme, tablo)
-            self.positions = positions_init
-            self.rotationCorompue = []</pre>
+&nbsp; &nbsp; &nbsp; La seconde classe est la classe <span id="classe_newBlock" class="code">newBlock</span> qui désigne la pièce en mouvement dans le tableau.
+Contrairement à <span class="code">tablo</span>, celle-ci a besoin d'arguments qui servent à l'initialisation de la pièce.
+<br>
+<code id="fctn_newBlock_init"><pre>def __init__(self, laForme, positions_init, tablo):
+        self.orient = 'DOWN'
+        self.forme = laForme
+        give_position(positions_init[self.orient], self.forme, tablo)
+        self.positions = positions_init
+        self.rotationCorompue = []</pre>
 </code>
 <ul>
-    <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html/orientation">l'orientation</a> de la pièce sur 'DOWN'.</li>
-    <li><span class="code">laForme</span> la forme de la pièce créée (<a href="Brice§.html/couleur">+</a>) enregistrée dans l'objet comme <span class="code">forme</span></li>
-    <li><span class="code">positions_init</span> est la <a href="Brice.html/positions">position</a> initiale de la pièce stockée dans <span class="code">CONST</span>
-        Grâce à ce dictionaire de positions on initialise la position de la pièce dans le tablo : <span class="code">give_position()</span> (plus de détails <a href="plusloin">ici</a>)</li>
+    <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html#orientation">l'orientation</a> de la pièce sur 'DOWN'.</li>
+    <li><span class="code">laForme</span> la forme de la pièce créée (<a href="Brice.html#couleur">+</a>) enregistrée dans l'objet comme <span class="code">forme</span></li>
+    <li><span class="code">positions_init</span> est la <a href="Brice.html#positions">position</a> initiale de la pièce stockée dans <span class="code">CONST</span>
+        Grâce à ce dictionaire de positions on initialise la position de la pièce dans le tablo : <span class="code">give_position()</span> (plus de détails <a href="#give_position">ici</a>)</li>
     <li><span class="code">tablo</span> est l'objet de la classe <span class="code">tablo</span> dans lequel se trouve la pièce crée.</li>
     <li><span class="code">rotationCorompue</span> est une liste des rotations qu'on ne peut plus utiliser.
-        Parfois certaines rotations ont des carrés dont la position a une valeur négative ce qui les place n'importe où. Cette liste associée à la fonction <code>test_rotation_coromp()</code>
-        qui a été développée en urgence pour éviter de telles horreurs (on verra comment après) mais devrait rester vide.</li>
+        Parfois certaines rotations ont des carrés dont la position a une valeur négative ce qui les placent n'importe où. 
+        Cette fonction a été développée en urgence pour éviter de telles horreurs (on verra comment après) mais la liste qu'elle génère devrait rester vide.</li>
 </ul>
 <br>
 Cette classe possède aussi 2 fonctions:
 <ul>
-    <li>La première fonction est <code>deplacement()</code> (c'est de ce charabia que je parlais en iontroduction).
-        Comme cette fonction me parreit completement incomprehensible pour les autres et que son intêret est évident, je propose de la réécrire ici en language algorithmique.
+    <li>La première fonction est <span id="fctn_newBlock_deplacement" class="code">deplacement()</span> (c'est de ce charabia dont je parlais en introduction).
+        Comme cette fonction me parrait complètement incompréhensible pour les autres mais que son intêret est évident, je propose de la réécrire ici en pseudo-language algorithmique.
         <code><pre>fonction déplacer(pièce, direction, tablo):
     peutDescendre = Vrai
     Si la direction est BAS:
         Pour (x,y) (x4), = la position de chaque carré de la pièce:
-            Si y>0 ET, soit la case en dessous est occupée par un carré 
+           Si y>0 ET, soit la case en dessous est occupée par un carré 
              -de la pièce soit cette case est vide:
                 continuer = on teste avec le prochain carré
-            Sinon Si la case dessous n'est pas un carré:
-                peutDescendre = Faux 
-                break = on arrete la boucle(ca sert à rien de continuer)
+           Sinon Si la case dessous n'est pas un carré:
+               peutDescendre = Faux 
+               break = on arrete la boucle(ca sert à rien de continuer)
         
         Si peutDescendre est toujours vrai:
-            positionAvant = sauvegarde de la position actuelle 
-            Pour rotation i , = chaque rotation de la pièce
-                Pour carré i de 0 à 4:
-                    (x,y) = la position du carré i dans la rotaion i 
-                    la position du carré i dans la rotaion i = (x,y-1)
-                cleCormopue = test_rotation_coromp(rotation i)
-                Si la rotaion i n'est pas déjà corompue:
-                    Si cleCorompue est Vrai:
-                        la rotaion i devient corompue
-                Sinon Si la rotation i est déjà corompue:
-                    Si cleCorompue est Faux:
-                        la rotation i est "décorompue"
-            tablo.update(formePièce, positionAvant, positionActuelle)
+           positionAvant = sauvegarde de la position actuelle 
+           Pour rotation i , = chaque rotation de la pièce
+               Pour carré i de 0 à 4:
+                   (x,y) = la position du carré i dans la rotaion i 
+                   la position du carré i dans la rotaion i = (x,y-1)
+               cleCorrmopue = test_rotation_corromp(rotation i)
+               Si la rotaion i n'est pas déjà corrompue:
+                   Si cleCorrompue est Vrai:
+                       la rotaion i devient corrompue
+               Sinon Si la rotation i est déjà corrompue:
+                   Si cleCorrompue est Faux:
+                       la rotation i est "décorrompue"
+           tablo.update(formePièce, positionAvant, positionActuelle)
         Sinon:
-            tablo.update(laPièceEstArrivée, formePièce, positionAvant)
+           tablo.update(laPièceEstArrivée, formePièce, positionAvant)
 
 
     Sinon Si la direction est DROITE:
-            # La même chose adaptée à la direction 
-            # Cependant lorsque les tests échouent la pièce
-            # n'est pas arrivée (Dernière ligne de DROITE)
+           # La même chose adaptée à la direction 
+           # Cependant lorsque les tests échouent la pièce
+           # n'est pas arrivée (Dernière ligne de DROITE)
 
     Sinon Si la direction est GAUCHE:
-            # Comme DROITE  
+           # Comme DROITE  
         </pre></code>
         C'est donc une fonction de déplacement classique dans laquelle on actualise le tablo grâce à la fonction
-        <a href="#tablo.update">tablo.update()</a> et que l'on test les éventueles erreurs grâce à la fonction
-        <a href="#testCorompt">test_rotation_coromp()</a> (détaillée plus bas).
+        <a href="#fctn_tablo_update">tablo.update()</a> et on teste les éventuelles erreurs grâce à la fonction
+        <a href="#test-rotation_corompt">test_rotation_coromp()</a> (détaillée plus bas).
     </li>
     <br>
     <li>
-        La fonction suivante est la fonction de <span class="code">rotation()</span> qui permet de faire rotater la pièce x).
-        Cette fonction créer une liste de rotation possibles en fonction de la forme de la pièce. Cette liste permet de faire tourner la pièce toujours dans le même sens.
-        La prochaine rotation choisie est la première dans le sens horaire si celle-ci n'est pas corompue (ce qui n'arrive jamias évidemment).
-        Une fois la prochaine rotation choisie on teste si les position des carrés de la pièce dans cette rotation sont dans le tableau
-        et qu'il ne sont pas sur un autre carré. Si on peut rotater les positions sont actualisées de la mêm manière que pour la fonction
-        <span class="code">déplacement()</span> et si on ne peut pas la rotation est annulée.
+        La fonction suivante est la fonction de <span id="fctn_newBlock_rotation" class="code">rotation()</span> qui permet de faire "rotater" la pièce x).
+        Cette fonction créé une liste de rotations possibles en fonction de la forme de la pièce. Cette liste permet de faire tourner la pièce toujours dans le même sens.
+        La prochaine rotation choisie est la première dans le sens horaire si celle-ci n'est pas corrompue (ce qui n'arrive jamias évidemment).
+        Une fois la prochaine rotation choisie on teste si les positions des carrés de la pièce dans cette rotation sont dans le tableau
+        et qu'il ne sont pas sur un autre carré. Si on peut "rotater", les positions sont actualisées de la même manière que pour la fonction
+        <span class="code">déplacement()</span> et si on ne peut pas, la rotation est annulée.
     </li>
 </ul>
+<br>
+<br>
+&nbsp; Finalement je vais présenter les trois fonctions restantes de ce module:
+<ul>
+    <li id="give_position"><span class="code">give_position()</span> est la fonction qui permet d'incruster la piéce dans le tableau à sa création.
+            Cette fonction permet aussi de détecter le gamOver : si la place initiale de la pièce est déjà occupée.</li>
+    <li id="give_couleur"><span class="code">give_couleur()</span> permet de donner une couleur différente aux pièces en mouvement et aux pièces déjà tombées.
+        Ce qui permet de mieux les distinguer lorsqu'on a besoin de chercher des erreurs dans le tableau.</li>
+    <li id="test_rotation_coromp"><span class="code">test_rotation_coromp()</span></li>
+</ul>
+
 </div>
-
-
     </article>
     
     
     <!--  SIDE  --> 
     <aside id="side">
-    
-        <div class="side_item">
-            <iframe src="https://open.spotify.com/embed?uri=spotify:album:3iWLGuSUDllPKhwMBajhAQ&amp;theme=white" allowtransparency="true" allow="encrypted-media" width="318" height="80" frameborder="0"></iframe>
-        </div>
-
-
-        <a target="_blank" href="https://ouroceansband.bandcamp.com" title="Bandcamp">
-            <div class="side_item">
-                <img src="img/side/bc.jpg" width="318" height="53"><br>
-            </div>
-        </a>
-
-
         <div class="side_item">
 	        <span class="title">newsletter</span><br><br>
 	        <form method="post" action="http://www.ouroceans.net/mailinglist/?p=subscribe" name="subscribeform">
