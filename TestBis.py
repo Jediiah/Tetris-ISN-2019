@@ -248,7 +248,8 @@ while not done:
 
         # création de l'affichage de prévisualisation de la pièce
         visuPiece = screen.subsurface(350,50,355,150)
-        visuPiece.fill(CONST.BLANC)
+        fondVisu = pygame.image.load("Images/fondVisu.png")
+        visuPiece.blit(fondVisu, (0,0))
 
         # Création du tableau de jeu
         tabloJeu = CLASSES.tablo() 
@@ -269,13 +270,15 @@ while not done:
 
             # s'il n y a pas de piece en mouvement dans le jeu
             if tabloJeu.isvide:
+                # affichage de la prochaine pièce
+                visuPiece.blit(fondVisu, (0,0))
+                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (20,40))
+
                 blocTombe = SelecBloc(prochainBloc) # création de la piece
                 tabloJeu.isvide = False
                 prochainBloc = listeBlocs[randint(0,6)] # séléction de la prochaine pièce
 
-                # affichage de la prochaine pièce
-                visuPiece.fill(CONST.BLANC)
-                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (50,45))
+                
 
 
             # permet de détecter les inputs
