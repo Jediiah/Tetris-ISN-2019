@@ -11,14 +11,14 @@ body {
 	width:1198px;
 	margin:0 auto;
 
-	background:#3aa299;
+	background-image:url("../Img/fondtetrisreparer.png");
 	background-position:top center;
-	background-repeat: no-repeat;
-	background-attachment:fixed;
+	background-repeat: repeat-y;
+	background-attachment:scroll;
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: auto;
 
 	font-family: 'Open Sans', sans-serif;
 	color: #247069;
@@ -44,6 +44,13 @@ img {
 	border:none;
 }
 
+pre {
+	background-color: snow;
+	border-width: 3px;
+	border-style: groove;
+	border-color: darkgray;
+	padding: 5px;
+}
 
 /*  Layout  */
 

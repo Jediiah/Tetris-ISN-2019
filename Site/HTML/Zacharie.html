@@ -13,7 +13,7 @@
         <!--  HEADER  -->
         <header id="header">
     	    <a href="index.php" title="Home">
-                <img src="Img/tetris.svg" alt="Tetris" width="250px">
+                <img src="../Img/tetris-logo.png" alt="Tetris" width="350px">
             </a>
         </header>
   
@@ -100,12 +100,13 @@ La première classe est la classe <span class="code">tablo</span> qui contient l
 La seconde classe est la classe <span class="code">newBlock</span> qui désigne la pièce en mouvement dans le tablo.
 Contrairement à <span class="code">tablo</span> celle-ci a besoin d'arguments qui servent à l'initialisation de la pièce.
 <br>
-<code>def __init__(self, laForme, positions_init, tablo):<br>
-            ...self.orient = 'DOWN'<br>
-            ...self.forme = laForme<br>
-            ...give_position(positions_init[self.orient], self.forme, tablo)<br>
-            ...self.positions = positions_init<br>
-            ...self.rotationCorompue = []<br>
+<br>
+<code><pre>def __init__(self, laForme, positions_init, tablo):
+            self.orient = 'DOWN'
+            self.forme = laForme
+            give_position(positions_init[self.orient], self.forme, tablo)
+            self.positions = positions_init
+            self.rotationCorompue = []</pre>
 </code>
 <ul>
     <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html/orientation">l'orientation</a> de la pièce sur 'DOWN'.</li>
@@ -117,7 +118,63 @@ Contrairement à <span class="code">tablo</span> celle-ci a besoin d'arguments q
         Parfois certaines rotations ont des carrés dont la position a une valeur négative ce qui les place n'importe où. Cette liste associée à la fonction <code>test_rotation_coromp()</code>
         qui a été développée en urgence pour éviter de telles horreurs (on verra comment après) mais devrait rester vide.</li>
 </ul>
-<br></div>
+<br>
+Cette classe possède aussi 2 fonctions:
+<ul>
+    <li>La première fonction est <code>deplacement()</code> (c'est de ce charabia que je parlais en iontroduction).
+        Comme cette fonction me parreit completement incomprehensible pour les autres et que son intêret est évident, je propose de la réécrire ici en language algorithmique.
+        <code><pre>fonction déplacer(pièce, direction, tablo):
+    peutDescendre = Vrai
+    Si la direction est BAS:
+        Pour (x,y) (x4), = la position de chaque carré de la pièce:
+            Si y>0 ET, soit la case en dessous est occupée par un carré 
+             -de la pièce soit cette case est vide:
+                continuer = on teste avec le prochain carré
+            Sinon Si la case dessous n'est pas un carré:
+                peutDescendre = Faux 
+                break = on arrete la boucle(ca sert à rien de continuer)
+        
+        Si peutDescendre est toujours vrai:
+            positionAvant = sauvegarde de la position actuelle 
+            Pour rotation i , = chaque rotation de la pièce
+                Pour carré i de 0 à 4:
+                    (x,y) = la position du carré i dans la rotaion i 
+                    la position du carré i dans la rotaion i = (x,y-1)
+                cleCormopue = test_rotation_coromp(rotation i)
+                Si la rotaion i n'est pas déjà corompue:
+                    Si cleCorompue est Vrai:
+                        la rotaion i devient corompue
+                Sinon Si la rotation i est déjà corompue:
+                    Si cleCorompue est Faux:
+                        la rotation i est "décorompue"
+            tablo.update(formePièce, positionAvant, positionActuelle)
+        Sinon:
+            tablo.update(laPièceEstArrivée, formePièce, positionAvant)
+
+
+    Sinon Si la direction est DROITE:
+            # La même chose adaptée à la direction 
+            # Cependant lorsque les tests échouent la pièce
+            # n'est pas arrivée (Dernière ligne de DROITE)
+
+    Sinon Si la direction est GAUCHE:
+            # Comme DROITE  
+        </pre></code>
+        C'est donc une fonction de déplacement classique dans laquelle on actualise le tablo grâce à la fonction
+        <a href="#tablo.update">tablo.update()</a> et que l'on test les éventueles erreurs grâce à la fonction
+        <a href="#testCorompt">test_rotation_coromp()</a> (détaillée plus bas).
+    </li>
+    <br>
+    <li>
+        La fonction suivante est la fonction de <span class="code">rotation()</span> qui permet de faire rotater la pièce x).
+        Cette fonction créer une liste de rotation possibles en fonction de la forme de la pièce. Cette liste permet de faire tourner la pièce toujours dans le même sens.
+        La prochaine rotation choisie est la première dans le sens horaire si celle-ci n'est pas corompue (ce qui n'arrive jamias évidemment).
+        Une fois la prochaine rotation choisie on teste si les position des carrés de la pièce dans cette rotation sont dans le tableau
+        et qu'il ne sont pas sur un autre carré. Si on peut rotater les positions sont actualisées de la mêm manière que pour la fonction
+        <span class="code">déplacement()</span> et si on ne peut pas la rotation est annulée.
+    </li>
+</ul>
+</div>
 
 
     </article>
