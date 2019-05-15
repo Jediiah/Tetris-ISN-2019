@@ -22,7 +22,7 @@
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="TetrisSite.html">Acceuil</a></td>
                     <td>&nbsp;</td>
-                    <td width="1" align="center"><a href="Nidhal.html">Nidhal</a></td>
+                    <td width="1" align="center"><a href="Nidhal_jsp.html">Nidhal</a></td>
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="Brice.html">Brice</a></td>
                     <td>&nbsp;</td>
@@ -40,7 +40,7 @@
     
         <div style="float:left; width:700px; margin-right:16px; margin-bottom:16px;"><span class="title">Le super dossier de Zacharie</span><br><br><br>
 <br>
-Vous voici sur la page où j'explique l'inextricable charabias que j'ai codé. Comme dis <a href="TetrisSite.html#content" >plus tôt</a> le fonctionnement général du jeu à été travaillé par Brice et moi. 
+Vous voici sur la page où j'explique l'inextricable charabias que j'ai codé. Comme dis <a href="TetrisSite.html" >plus tôt</a> le fonctionnement général du jeu à été travaillé par Brice et moi. 
 Ce qui s'est traduit par le module <span class="nomDeFichier">CLASSES</span>, que j'ai cependant entièrement écrit ainsi que la partie délimité par ==TETRIS== dans <span class="nomDeFichier">TetrisJeu</span>.
 <br>
 Avant de commencer je vous rappelle qu'il est conseillé de lire le dossier de <a href="Brice.html" >Brice</a> avant celui-ci.
@@ -79,9 +79,9 @@ Avant de commencer je vous rappelle qu'il est conseillé de lire le dossier de <
     <br>
     <ul>
         <li><span class="code">esrArrive</span> est un booléen, faux par défaut, qui indique lorsque la pièce en mouvement est arrivée et ne pourra plus bouger.</li>
-        <li><span class="code">positionsAvant</span> et <span class="code">positionsApres</span> sont les <a href="Brice.html#positions">positions</a> (listes de tuples)
+        <li><span class="code">positionsAvant</span> et <span class="code">positionsApres</span> sont les <a href="Brice.html#pieces">positions</a> (listes de tuples)
         de la pièce avant et après le déplacement ou la rotation de celle-ci.</li>
-        <li><span class="code">formestr</span> est la forme de la pièce pour insérer la bonne dans le <a href="Brice.html#couleur">tableau</a>.</li>
+        <li><span class="code">formestr</span> est la forme de la pièce pour insérer la bonne dans le <a href="Brice.html#pieces">tableau</a>.</li>
     </ul>
     <br>
     Voyons maintenant le fonctionement de la fonction <span style="font-size: 1em; color: #247069";><i class="far fa-smile"></i></span>.
@@ -108,9 +108,9 @@ Contrairement à <span class="code">tablo</span>, celle-ci a besoin d'arguments 
         self.rotationCorompue = []</pre>
 </code>
 <ul>
-    <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html#orientation">l'orientation</a> de la pièce sur 'DOWN'.</li>
-    <li><span class="code">laForme</span> la forme de la pièce créée (<a href="Brice.html#couleur">+</a>) enregistrée dans l'objet comme <span class="code">forme</span></li>
-    <li><span class="code">positions_init</span> est la <a href="Brice.html#positions">position</a> initiale de la pièce stockée dans <span class="code">CONST</span>
+    <li><span class="code">orient</span> est l'initialisation de <a href="Brice.html#rotation">l'orientation</a> de la pièce sur 'DOWN'.</li>
+    <li><span class="code">laForme</span> la forme de la pièce créée (<a href="Brice.html#pieces">+</a>) enregistrée dans l'objet comme <span class="code">forme</span></li>
+    <li><span class="code">positions_init</span> est la <a href="Brice.html#pieces">position</a> initiale de la pièce stockée dans <span class="code">CONST</span>
         Grâce à ce dictionaire de positions on initialise la position de la pièce dans le tablo : <span class="code">give_position()</span> (plus de détails <a href="#give_position">ici</a>)</li>
     <li><span class="code">tablo</span> est l'objet de la classe <span class="code">tablo</span> dans lequel se trouve la pièce crée.</li>
     <li><span class="code">rotationCorompue</span> est une liste des rotations qu'on ne peut plus utiliser.
