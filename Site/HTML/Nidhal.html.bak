@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Language" content="fr" />
+        <title>TetrisSite - ISN2019</title>
+        <link rel='stylesheet' type='text/css' href="..\STYLE\laFeuuille.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <header id="header">
+    	    <a href="TetrisSite.html" title="Home">
+                <img src="../Img/tetris-logo.png" alt="Tetris" width="250px">
+            </a>
+        </header>
+
+        <nav id="menu">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                    <td>&nbsp;</td>
+                    <td width="1" align="center"><a href="TetrisSite.html">Acceuil</a></td>
+                    <td>&nbsp;</td>
+                    <td width="1" align="center">Nidhal</td>
+                    <td>&nbsp;</td>
+                    <td width="1" align="center"><a href="Brice.html">Brice</a></td>
+                    <td>&nbsp;</td>
+                    <td width="1" align="center"><a href="Zacharie.html">Zacharie</a></td>
+                    <td>&nbsp;</td>
+                    <!-- icon GitHub (en dessous) -->
+                    <td width="1" align="center"><a target="_blank" href="https://github.com/Jediiah/Tetris-ISN-2019"><span style="font-size: 2em; color: purple;"><i class="fab fa-github"></i></span></a></td>
+                    <td>&nbsp;</td>
+                </tr></tbody>
+            </table>  
+        </nav>
+ 
+
+    <article id="content">
+    
+            <div style="float:left; width:700px; margin-right:16px; margin-bottom:16px;"><span class="title">Le dossier de Nidhal</span><br><br><br>
+
+            </div>
+                  
+    </article>
+    
+    
+  
+    <aside id="side">
+            <div id="Sommaire" class="Sommaire">
+                    <div>
+                        <h2>Sommaire</h2>
+                    </div>
+                    <ul>
+                        <li><a href="#classe_tablo">tablo</a></li>
+                            <ul>
+                                <li><a href="#fctn_tablo_test">tablo.test()</a></li>
+                                <li><a href="#fctn_tablo_update">tablo.update()</a></li>
+                            </ul>
+                        <li><a href="#classe_newBlock">newBlock</a></li>
+                            <ul>
+                                <li><a href="#fctn_newBlock_init">newBlock.__init__()</a></li>
+                                <li><a href="#fctn_newBlock_deplacement">newBlock.deplacement()</a></li>
+                                <li><a href="#fctn_newBlock_rotation">newBlock.rotation()</a></li>
+                            </ul>
+                        <li><a href="#autres_fonctions">Autres fonctions</a></li>
+                            <ul>
+                                <li><a href="#give_position">give_position()</a></li>
+                                <li><a href="#give_couleur">give_couleur()</a></li>
+                                <li><a href="#test_rotation_coromp">test_rotation_coromp()</a></li>
+                            </ul>
+                    </ul>
+                </div>   
+                  
+    </aside>
+    
+    
+    </body>
+</html>

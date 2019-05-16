@@ -22,7 +22,7 @@
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="TetrisSite.html">Acceuil</a></td>
                     <td>&nbsp;</td>
-                    <td width="1" align="center"><a href="Nidhal.html">Nidhal</a></td>
+                    <td width="1" align="center"><a href="Nidhal_jsp.html">Nidhal</a></td>
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="Brice.html">Brice</a></td>
                     <td>&nbsp;</td>
@@ -182,6 +182,22 @@ Cette classe possède aussi 2 fonctions:
     <li id="give_couleur"><span class="code">give_couleur()</span> permet de donner une couleur différente aux pièces en mouvement et aux pièces déjà tombées.
         Ce qui permet de mieux les distinguer lorsqu'on a besoin de chercher des erreurs dans le tableau.</li>
     <li id="test_rotation_coromp"><span class="code">test_rotation_coromp()</span></li>
+</ul>
+<br>
+Voici donc pour ce module qui contient le "coeur" du jeu.
+<br>
+<br>
+<br>
+&nbsp; &nbsp; &nbsp; La suite est la boucle du jeu dans <span class="code">TetrisJeu</span> qui est délimitée par ("<span class="code">===TETRIS===</span>").
+J'ai également codé cette partie qui utilise les classes et fonctions précédemment exlpliquées. 
+<br>
+Cette partie du programme arrive une fois que le <a href="Nidhal.html">menu</a> est passé. Avant de lancer la boucle
+elle-même, nous avons besoin de "préparer le terrain". 
+<br>
+&nbsp; Tout d'abord nous affichons le fons du jeu pouvant être changé dans les options, ensuite nous avons besoin d'isoler certaines parties de la fenêtre (<span class="code">subspace()</span>) qui
+aurons chacune une fonction spécifique.
+<ul>
+    <li><span class="code">platojeu</span> est la sous-fenêtre principale où est affiché le </li>
 </ul>
 
 </div>
