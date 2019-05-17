@@ -22,7 +22,7 @@
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="TetrisSite.html">Acceuil</a></td>
                     <td>&nbsp;</td>
-                    <td width="1" align="center"><a href="Nidhal_jsp.html">Nidhal</a></td>
+                    <td width="1" align="center"><a href="Nidhal.html">Nidhal</a></td>
                     <td>&nbsp;</td>
                     <td width="1" align="center"><a href="Brice.html">Brice</a></td>
                     <td>&nbsp;</td>
@@ -195,20 +195,32 @@ J'ai également codé cette partie qui utilise les classes et fonctions précéd
 Cette partie du programme arrive une fois que le <a href="Nidhal.html">menu</a> est passé. Avant de lancer la boucle
 elle-même, nous avons besoin de "préparer le terrain". 
 <br>
+<br>
 &nbsp; Tout d'abord nous affichons le fons du jeu pouvant être changé dans les options, ensuite nous avons besoin d'isoler certaines parties de la fenêtre (<span class="code">subspace()</span>) qui
 aurons chacune une fonction spécifique.
 <ul>
-    <li><span class="code">platojeu</span> est la sous-fenêtre principale où est affiché le "jeu" ainsi qsu'un cadrillage pour aider à visualiser.</li>
+    <li><span class="code">platojeu</span> est la sous-fenêtre principale où est affiché le "jeu" ainsi qu'un cadrillage pour aider à visualiser.</li>
     <li><span class="code">afficheScore</span> est la sous fenêtre où le score est affiché.</li>
     <li><span class="code">visuPiece</span> est la sous fenêtre où la prochaine piece est affichée.</li>
 </ul>
 <br>
 &nbsp; Ensuite un objet de la classe <span class="code">tablo</span> est créé: <span class="code">tabloJeu</span>. 
-Puis on créé la descente automatique de la pièce: un nouvel événement <span class="code">gravite</span> puis une commande 
+<br>
+&nbsp; Puis on créé la descente automatique de la pièce : un nouvel événement <span class="code">gravite</span> et une commande 
 qui produit cet événement toute les 500ms. Enfin notre moyen de choisir la prochaine pièce est de choisir une valeur aléatoire 
 dans une liste.
 <br>
-&nbsp; &nbsp; A partir d'ici commence enfin la boucle du jeu.
+<br>
+&nbsp; &nbsp; A partir d'ici commence enfin la boucle du jeu qui est limitée à 15 boucles par seconde (<span class="code">clock.tick(15)</span>)
+<br>
+<ul>
+    <li>D'abord si le <span class="code">tablo</span> est vide (<span class="code">tabloJeu.isVide==True</span>), on choisi la prochaine pièce qué l'on affiche dans 
+<span class="code">visuPiece</span> puis on créer un objet de la classe <span class="code">newBlock</span> dans <span class="code">tabloJeu</span>.</li>
+    <li>Ensuite on cherche tous les "inputs" détectés et on associe une fonction à ceux qu'on veut : flèches pour les directions (haut pour la rotation)
+        et backspace pour quitter.</li>
+    <li>Ensuite si le score à changer on actualise la fenêtre <span class="code">afficheScore</span>.</li>
+    <li>Finalement on affiche touts les carrés où ils doivent être grâce à leur position dans le tableau.</li>
+</ul>
 
 </div>
     </span>
