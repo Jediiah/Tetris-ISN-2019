@@ -235,12 +235,11 @@ while not done:
         # -- Déssine l'écran du jeu -- #
         #fond 
         imageFond = pygame.image.load("Images/fond_jeu.jpg")
-        imageJeu = pygame.image.load("Images/Damier_20.png")
-        
         screen.blit(imageFond, (0,0))
         
         # delimitation de la zone de jeu (le cadrillage)
         platoJeu = screen.subsurface(50,25,345,609)
+        imageJeu = pygame.image.load("Images/Damier_20.png")
         platoJeu.blit(imageJeu, (0,0))
 
         # création d'une surface d'affichage des scores

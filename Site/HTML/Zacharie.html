@@ -188,6 +188,7 @@ Voici donc pour ce module qui contient le "coeur" du jeu.
 <br>
 <br>
 <br>
+<br>
 &nbsp; &nbsp; &nbsp; La suite est la boucle du jeu dans <span class="code">TetrisJeu</span> qui est délimitée par ("<span class="code">===TETRIS===</span>").
 J'ai également codé cette partie qui utilise les classes et fonctions précédemment exlpliquées. 
 <br>
@@ -197,8 +198,17 @@ elle-même, nous avons besoin de "préparer le terrain".
 &nbsp; Tout d'abord nous affichons le fons du jeu pouvant être changé dans les options, ensuite nous avons besoin d'isoler certaines parties de la fenêtre (<span class="code">subspace()</span>) qui
 aurons chacune une fonction spécifique.
 <ul>
-    <li><span class="code">platojeu</span> est la sous-fenêtre principale où est affiché le </li>
+    <li><span class="code">platojeu</span> est la sous-fenêtre principale où est affiché le "jeu" ainsi qsu'un cadrillage pour aider à visualiser.</li>
+    <li><span class="code">afficheScore</span> est la sous fenêtre où le score est affiché.</li>
+    <li><span class="code">visuPiece</span> est la sous fenêtre où la prochaine piece est affichée.</li>
 </ul>
+<br>
+&nbsp; Ensuite un objet de la classe <span class="code">tablo</span> est créé: <span class="code">tabloJeu</span>. 
+Puis on créé la descente automatique de la pièce: un nouvel événement <span class="code">gravite</span> puis une commande 
+qui produit cet événement toute les 500ms. Enfin notre moyen de choisir la prochaine pièce est de choisir une valeur aléatoire 
+dans une liste.
+<br>
+&nbsp; &nbsp; A partir d'ici commence enfin la boucle du jeu.
 
 </div>
     </span>
