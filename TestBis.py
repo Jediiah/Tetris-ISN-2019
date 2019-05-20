@@ -231,11 +231,29 @@ while not done:
 
     elif windows==1:
 
+        def plus_espaces(t):
+            str_t = [[] for i in range(20)]
+            for i in range(len(t)):
+                for item in t[i]:
+                    temp = str(item)
+                    cote = 'd'
+                    while len(temp) < 8:
+                        if cote == 'd':
+                            temp = ' ' + temp
+                            cote = 'g'
+                        elif cote == 'g':
+                            temp = temp + ' '
+                            cote = 'd'
+                    str_t[-i].append(temp)
+            return(str_t)
+
+
+
        #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
         imageFond = pygame.image.load("Images/fond_jeu.jpg")
-        screen.blit(imageFond, (0,0))
+        screen.fill(CONST.BLANC)
         
         # delimitation de la zone de jeu (le cadrillage)
         platoJeu = screen.subsurface(50,25,345,609)
