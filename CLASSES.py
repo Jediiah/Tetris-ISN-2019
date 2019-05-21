@@ -86,6 +86,7 @@ class tablo:
         '''
         self.tablo = [[0,0,0,0,0,0,0,0,0,0] for i in range(20)] # Indique presence des blocs
         self.score = 0
+        self.lignes = 0
         self.isvide = True
         self.gameOver = False
         
@@ -109,6 +110,7 @@ class tablo:
                 combo += 1
                 i -= 1
 
+                self.lignes += combo
                 if combo >= 4:  # le gain de score est totalement arbitraire meme si basé sur le Tetris original
                     self.score += 800 + combo*100
                 else:

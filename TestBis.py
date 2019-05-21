@@ -272,7 +272,8 @@ while not done:
         tabloJeu = CLASSES.tablo() 
         tempScore = 1
 
-        policeScore = pygame.font.Font(None, 96) # la police utilisée pour afficher le score   
+        pygame.font.init()
+        policeScore = pygame.font.Font(False, 56) # la police utilisée pour afficher le score   
 
         graviteForce = 500
         gravite = pygame.USEREVENT + 1 # création d'un nouvel événement
@@ -318,11 +319,12 @@ while not done:
 
             # si le score du joueur change on actualise l'affichage de celui-ci
             if tabloJeu.score!=tempScore:
-                textScore = policeScore.render(str(tabloJeu.score), False, (0,0,0))
-                screen.blit(imageFond, (0,0))
+                textScore = policeScore.render('Score : ' + str(tabloJeu.score), False, (0,0,0))
+                textLignes = policeScore.render('Lignes : ' + str(tabloJeu.score), False, (0,0,0))
+                screen.fill(CONST.BLANC)
                 afficheScore.blit(textScore, (5,40))
+                afficheScore.blit(textLignes, (5,70))
                 tempScore = tabloJeu.score
-
 
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             platoJeu.blit(imageJeu, (0,0))
