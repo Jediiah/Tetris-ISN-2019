@@ -231,25 +231,6 @@ while not done:
 
     elif windows==1:
 
-        def plus_espaces(t):
-            str_t = [[] for i in range(20)]
-            for i in range(len(t)):
-                for item in t[i]:
-                    temp = str(item)
-                    cote = 'd'
-                    while len(temp) < 8:
-                        if cote == 'd':
-                            temp = ' ' + temp
-                            cote = 'g'
-                        elif cote == 'g':
-                            temp = temp + ' '
-                            cote = 'd'
-                    str_t[-i].append(temp)
-            return(str_t)
-
-
-
-       #son_base3.stop()
         # -- Déssine l'écran du jeu -- #
         #fond 
         imageFond = pygame.image.load("Images/fond_jeu.jpg")
@@ -277,7 +258,7 @@ while not done:
 
         graviteForce = 300
         gravite = pygame.USEREVENT + 1 # création d'un nouvel événement
-        pygame.time.set_timer(gravite, graviteForce) # Cet événement est produit toutes les 500ms (descente automatique)
+        pygame.time.set_timer(gravite, graviteForce) # Cet événement est produit toutes les 300ms (descente automatique)
 
         # pour séléctionner aléatoirement la prochaine pièce
         listeBlocs = ['carre','laBarre','leThe','eclaireD','eclaireG','elleG','elleD']
@@ -308,7 +289,6 @@ while not done:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                     done = True
                     windows = 0
-
                 # "echap" met la pause, echap pour en sortir
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     pause = True
@@ -317,10 +297,8 @@ while not done:
                         for event in pygame.event.get():
                             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                                 pause = False
-                        
                         pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
                         clock.tick(5) # limite la vitesse de boucle
-
 
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                     blocTombe.deplacement('DROITE', tabloJeu)
@@ -333,6 +311,7 @@ while not done:
                 if event.type == gravite:
                     blocTombe.deplacement('BAS',tabloJeu)
 
+
             # si le score du joueur change on actualise l'affichage de celui-ci
             if tabloJeu.score!=tempScore:
                 textScore = policeScore.render('Score : ' + str(tabloJeu.score), False, (0,0,0))
@@ -341,6 +320,7 @@ while not done:
                 afficheScore.blit(textScore, (5,40))
                 afficheScore.blit(textLignes, (5,70))
                 tempScore = tabloJeu.score
+
 
             # je compte dans une grille de 10x20 avec des cases de 30x30px (subspace de 300x600)
             platoJeu.blit(imageJeu, (0,0))
@@ -361,9 +341,12 @@ while not done:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN and event.key==(pygame.K_BACKSPACE or pygame.K_ESCAPE):
                     gameover = 0 # retour au menu
+                if event.type == pygame.QUIT:
+                    done = True
+                    windows = 3
 
             pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
-            clock.tick(30) # limite la vitesse de boucle
+            clock.tick(5) # limite la vitesse de boucle
 
 
 #'''================================================================================================='''
