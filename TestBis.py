@@ -291,15 +291,13 @@ while not done:
 
             # s'il n y a pas de piece en mouvement dans le jeu
             if tabloJeu.isvide:
-                # affichage de la prochaine pièce
-                visuPiece.blit(fondVisu, (0,0))
-                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (20,40))
-
                 blocTombe = SelecBloc(prochainBloc) # création de la piece
                 tabloJeu.isvide = False
                 prochainBloc = listeBlocs[randint(0,6)] # séléction de la prochaine pièce
 
-                
+                # affichage de la prochaine pièce
+                visuPiece.blit(fondVisu, (0,0))
+                visuPiece.blit(CONST.ImagesPrevisualisation[prochainBloc], (20,40))
 
 
             # permet de détecter les inputs
