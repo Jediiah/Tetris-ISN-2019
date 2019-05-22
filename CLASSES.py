@@ -101,17 +101,14 @@ class tablo:
         combo = 0
         for i in range(20): 
             if not 0 in self.tablo[i]:
-                for j in range(i,20):
-                    if self.tablo[j]!=[0,0,0,0,0,0,0,0,0,0]:
-                        tempLigne = self.tablo[j+1].copy()
-                        self.tablo[j] = tempLigne.copy()
-                    else:
-                        break
+                for j in range(i,19):
+                    tempLigne = self.tablo[j+1].copy()
+                    self.tablo[j] = tempLigne.copy()
                 combo += 1
                 i -= 1
 
                 self.lignes += combo
-                if combo >= 4:  # le gain de score est totalement arbitraire meme si basé sur le Tetris original
+                if combo == 4:  # le gain de score est totalement arbitraire meme si basé sur le Tetris original
                     self.score += 800 + combo*100
                 else:
                     self.score += combo*100

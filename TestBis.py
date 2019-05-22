@@ -275,7 +275,7 @@ while not done:
         pygame.font.init()
         policeScore = pygame.font.Font(None, 56) # la police utilisée pour afficher le score   
 
-        graviteForce = 500
+        graviteForce = 300
         gravite = pygame.USEREVENT + 1 # création d'un nouvel événement
         pygame.time.set_timer(gravite, graviteForce) # Cet événement est produit toutes les 500ms (descente automatique)
 
@@ -304,10 +304,12 @@ while not done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
+                    windows = 3
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                     done = True
                     windows = 0
 
+                # "echap" met la pause, echap pour en sortir
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     pause = True
                     platoJeu.blit(pause_img, (200, 100))
@@ -353,7 +355,7 @@ while not done:
 
 
         gameover = 1
-        while gameover==1:
+        while gameover==1 and windows!=3:
             screen.blit(GameOver, (220,336))
 
             for event in pygame.event.get():
