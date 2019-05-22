@@ -99,17 +99,26 @@ class tablo:
             Le combo sert a détécter un "Tetris" (4 lignes d'un coup) ce qui augmente le score.
         '''
         combo = 0
-        for i in range(20): 
-            if not 0 in self.tablo[i]:
-                for j in range(i,19):
-                    tempLigne = self.tablo[j+1].copy()
-                    self.tablo[j] = tempLigne.copy()
-                combo += 1
-                i -= 1
+        plusDeLignes = False
+        while not plusDeLignes:
+            for i in range(20): 
+                if not 0 in self.tablo[i]:
+                    for j in range(i,19):
+                        tempLigne = self.tablo[j+1].copy()
+                        self.tablo[j] = tempLigne.copy()
+                    combo += 1
+                    i -= 2
+            tempcheck = 0
+            for k in range(20):
+                if not 0 in self.tablo[k]:
+                    tempcheck = 1
+            if tempcheck == 0:
+                plusDeLignes = True
+
 
                 self.lignes += combo
                 if combo == 4:  # le gain de score est totalement arbitraire meme si basé sur le Tetris original
-                    self.score += 800 + combo*100
+                    self.score += 800
                 else:
                     self.score += combo*100
     
