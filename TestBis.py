@@ -165,7 +165,7 @@ while not done:
                 # "echap" met la pause, echap pour en sortir
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     pause = True
-                    platoJeu.blit(pause_img, (50, 50))
+                    platoJeu.blit(pause_img, (100, 200))
                     while pause:
                         for event in pygame.event.get():
                             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
