@@ -273,7 +273,7 @@ while not done:
         tempScore = 1
 
         pygame.font.init()
-        policeScore = pygame.font.Font(False, 56) # la police utilisée pour afficher le score   
+        policeScore = pygame.font.Font(None, 56) # la police utilisée pour afficher le score   
 
         graviteForce = 500
         gravite = pygame.USEREVENT + 1 # création d'un nouvel événement
@@ -282,6 +282,9 @@ while not done:
         # pour séléctionner aléatoirement la prochaine pièce
         listeBlocs = ['carre','laBarre','leThe','eclaireD','eclaireG','elleG','elleD']
         prochainBloc = listeBlocs[randint(0,6)] 
+
+        # signe pause
+        pause_img = pygame.image.load("Images/pause.png")
 
        #  Boucle principale du jeu   
         while windows==1 and tabloJeu.gameOver==False:
@@ -306,6 +309,19 @@ while not done:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                     done = True
                     windows = 0
+
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    pause = True
+                    platoJeu.blit(pause_img, (200, 100))
+                    while pause:
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                                pause = False
+                        
+                        pygame.display.flip() # ajoute les elements crees sur la fenetre de jeu
+                        clock.tick(5) # limite la vitesse de boucle
+
+
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                     blocTombe.deplacement('DROITE', tabloJeu)
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
