@@ -149,7 +149,7 @@ while not done:
 
             # vitesse de tombée
             if tabloJeu.lignes%1==0 and tabloJeu.lignes!=tempLignes:
-                graviteForce = int(graviteForce*0.5)
+                graviteForce = int(graviteForce*0.8)
                 gravitation = pygame.time.set_timer(gravite, graviteForce) # Cet événement est produit toutes les 300ms (descente automatique)
                 tempLignes = tabloJeu.lignes
                 
